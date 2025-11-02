@@ -9,56 +9,70 @@
     <meta name="theme-color" id="theme-color-meta" content="#4a90e2">
     <style>
         :root {
+            /* === 基本カラーパレット（4色のみ） === */
+            --color-primary: #3b82f6;
+            --color-primary-hover: #2563eb;
+            --color-secondary: #64748b;
+            --color-secondary-hover: #475569;
+            --color-success: #10b981;
+            --color-success-hover: #059669;
+            --color-danger: #ef4444;
+            --color-danger-hover: #dc2626;
+
+            /* === 背景色 === */
             --bg-primary: #ffffff;
-            --bg-secondary: #f0f2f5;
-            --bg-tertiary: #fdfdfd;
-            --bg-tertiary-rgb: 253, 253, 253;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --bg-tertiary-rgb: 241, 245, 249;
             --bg-input: #ffffff;
-            --bg-user-message: #dcf8c6;
-            --bg-model-message: #e5e5ea;
-            --bg-system-message: #f0f8ff;
-            --bg-error-message: #ffebee;
-            --bg-button: #4a90e2;
-            --bg-button-rgb: 74, 144, 226;
-            --bg-button-hover: #357abd;
-            --bg-button-disabled: #a0c3e8;
-            --bg-button-action: #777777;
-            --bg-button-action-hover: #555555;
-            --bg-button-delete: #e53935;
-            --bg-button-delete-hover: #c62828;
-            --bg-button-retry: #43a047;
-            --bg-button-retry-hover: #2e7d32;
-            --bg-button-edit: #ff9800;
-            --bg-button-edit-hover: #f57c00;
-            --bg-button-copy: #e91e63;
-            --bg-button-copy-hover: #c2185b;
-            --bg-button-paste: #00bcd4;
-            --bg-button-paste-hover: #0097a7;
-            --bg-button-duplicate: #546e7a;
-            --bg-button-duplicate-hover: #37474f;
-            --bg-button-export: #1e88e5;
-            --bg-button-export-hover: #1565c0;
-            --bg-button-save: #30d158;
-            --bg-button-save-hover: #24a345;
-            --bg-button-cancel: #f44336;
-            --bg-button-cancel-hover: #d32f2f;
-            --bg-button-update: #1976d2;
-            --bg-button-update-hover: #115293;
-            --bg-header: #4a90e2;
+            --bg-user-message: #dbeafe;
+            --bg-model-message: #f1f5f9;
+            --bg-system-message: #fef3c7;
+            --bg-error-message: #fee2e2;
+            --bg-memo: #ffffff;
+            --bg-header: var(--color-primary);
             --overlay-base-rgb: 255, 255, 255;
             --chat-overlay-alpha: 0.65;
-            --bg-cascade-button: var(--bg-button-action);
-            --bg-cascade-button-hover: var(--bg-button-action-hover);
-            --bg-cascade-delete-button: var(--bg-button-delete);
-            --bg-cascade-delete-button-hover: var(--bg-button-delete-hover);
-            --text-cascade-indicator: var(--text-secondary);
-            --bg-button-header-delete: #e53935;
-            --bg-button-header-delete-hover: #c62828;
-            --bg-button-header-copy: #e91e63;
-            --bg-button-header-copy-hover: #c2185b;
-            --bg-code-copy-button: var(--bg-button-action);
-            --bg-code-copy-button-hover: var(--bg-button-action-hover);
+
+            /* === ボタン色（基本色を参照） === */
+            --bg-button: var(--color-primary);
+            --bg-button-rgb: 59, 130, 246;
+            --bg-button-hover: var(--color-primary-hover);
+            --bg-button-disabled: #cbd5e1;
+            --bg-button-action: var(--color-secondary);
+            --bg-button-action-hover: var(--color-secondary-hover);
+            --bg-button-delete: var(--color-danger);
+            --bg-button-delete-hover: var(--color-danger-hover);
+            --bg-button-retry: var(--color-success);
+            --bg-button-retry-hover: var(--color-success-hover);
+            --bg-button-edit: var(--color-secondary);
+            --bg-button-edit-hover: var(--color-secondary-hover);
+            --bg-button-copy: var(--color-secondary);
+            --bg-button-copy-hover: var(--color-secondary-hover);
+            --bg-button-paste: var(--color-secondary);
+            --bg-button-paste-hover: var(--color-secondary-hover);
+            --bg-button-duplicate: var(--color-secondary);
+            --bg-button-duplicate-hover: var(--color-secondary-hover);
+            --bg-button-export: var(--color-primary);
+            --bg-button-export-hover: var(--color-primary-hover);
+            --bg-button-save: var(--color-success);
+            --bg-button-save-hover: var(--color-success-hover);
+            --bg-button-cancel: var(--color-danger);
+            --bg-button-cancel-hover: var(--color-danger-hover);
+            --bg-button-update: var(--color-primary);
+            --bg-button-update-hover: var(--color-primary-hover);
+            --bg-cascade-button: var(--color-secondary);
+            --bg-cascade-button-hover: var(--color-secondary-hover);
+            --bg-cascade-delete-button: var(--color-danger);
+            --bg-cascade-delete-button-hover: var(--color-danger-hover);
+            --bg-button-header-delete: var(--color-danger);
+            --bg-button-header-delete-hover: var(--color-danger-hover);
+            --bg-button-header-copy: var(--color-secondary);
+            --bg-button-header-copy-hover: var(--color-secondary-hover);
+            --bg-code-copy-button: var(--color-secondary);
+            --bg-code-copy-button-hover: var(--color-secondary-hover);
             --text-code-copy-button: var(--text-light);
+            --text-cascade-indicator: var(--text-secondary);
 
             --text-primary: #333333;
             --text-secondary: #777777;
@@ -156,54 +170,66 @@
         }
 
         body.dark-mode {
-            --bg-primary: #1a1a1a;
-            --bg-secondary: #101010;
-            --bg-tertiary: #252525;
-            --bg-tertiary-rgb: 37, 37, 37;
-            --bg-input: #303030;
-            --bg-user-message: #056162;
-            --bg-model-message: #3a3a3c;
-            --bg-system-message: #2a3a4a;
-            --bg-error-message: #5c1c1c;
-            --bg-button: #007aff;
-            --bg-button-rgb: 0, 122, 255;
-            --bg-button-hover: #005ecb;
-            --bg-button-disabled: #4a5a70;
-            --bg-button-action: #666666;
-            --bg-button-action-hover: #888888;
-            --bg-button-delete: #ff3b30;
-            --bg-button-delete-hover: #d12c23;
-            --bg-button-retry: #34c759;
-            --bg-button-retry-hover: #249a41;
-            --bg-button-edit: #ff9500;
-            --bg-button-edit-hover: #d17d00;
-            --bg-button-copy: #f06292;
-            --bg-button-copy-hover: #ec407a;
-            --bg-button-paste: #4dd0e1;
-            --bg-button-paste-hover: #26c6da;
-            --bg-button-duplicate: #8e8e93;
-            --bg-button-duplicate-hover: #6b6b70;
-            --bg-button-export: #0a84ff;
-            --bg-button-export-hover: #0069d1;
-            --bg-button-save: #30d158;
-            --bg-button-save-hover: #24a345;
-            --bg-button-cancel: #ff453a;
-            --bg-button-cancel-hover: #d1332b;
-            --bg-button-update: #0a84ff;
-            --bg-button-update-hover: #0069d1;
-            --bg-header: #007aff;
-            --overlay-base-rgb: 30, 30, 30;
-            --bg-memo: #2c2c2e;
-            --bg-cascade-button: var(--bg-button-action);
-            --bg-cascade-button-hover: var(--bg-button-action-hover);
-            --bg-cascade-delete-button: var(--bg-button-delete);
-            --bg-cascade-delete-button-hover: var(--bg-button-delete-hover);
-            --text-cascade-indicator: var(--text-secondary);
-            --bg-button-header-delete: var(--bg-button-delete);
-            --bg-button-header-delete-hover: var(--bg-button-delete-hover);
-            --bg-button-header-copy: var(--bg-button-copy);
-            --bg-button-header-copy-hover: var(--bg-button-copy-hover);
-            --bg-code-copy-button: var(--bg-button-action);
+            /* === 基本カラーパレット（4色のみ） === */
+            --color-primary: #3b82f6;
+            --color-primary-hover: #60a5fa;
+            --color-secondary: #64748b;
+            --color-secondary-hover: #94a3b8;
+            --color-success: #10b981;
+            --color-success-hover: #34d399;
+            --color-danger: #ef4444;
+            --color-danger-hover: #f87171;
+
+            /* === 背景色 === */
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --bg-tertiary-rgb: 51, 65, 85;
+            --bg-input: #1e293b;
+            --bg-user-message: #1e3a5f;
+            --bg-model-message: #334155;
+            --bg-system-message: #422006;
+            --bg-error-message: #450a0a;
+            --bg-memo: #1e293b;
+            --bg-header: var(--color-primary);
+            --overlay-base-rgb: 15, 23, 42;
+
+            /* === ボタン色（基本色を参照） === */
+            --bg-button: var(--color-primary);
+            --bg-button-rgb: 59, 130, 246;
+            --bg-button-hover: var(--color-primary-hover);
+            --bg-button-disabled: #475569;
+            --bg-button-action: var(--color-secondary);
+            --bg-button-action-hover: var(--color-secondary-hover);
+            --bg-button-delete: var(--color-danger);
+            --bg-button-delete-hover: var(--color-danger-hover);
+            --bg-button-retry: var(--color-success);
+            --bg-button-retry-hover: var(--color-success-hover);
+            --bg-button-edit: var(--color-secondary);
+            --bg-button-edit-hover: var(--color-secondary-hover);
+            --bg-button-copy: var(--color-secondary);
+            --bg-button-copy-hover: var(--color-secondary-hover);
+            --bg-button-paste: var(--color-secondary);
+            --bg-button-paste-hover: var(--color-secondary-hover);
+            --bg-button-duplicate: var(--color-secondary);
+            --bg-button-duplicate-hover: var(--color-secondary-hover);
+            --bg-button-export: var(--color-primary);
+            --bg-button-export-hover: var(--color-primary-hover);
+            --bg-button-save: var(--color-success);
+            --bg-button-save-hover: var(--color-success-hover);
+            --bg-button-cancel: var(--color-danger);
+            --bg-button-cancel-hover: var(--color-danger-hover);
+            --bg-button-update: var(--color-primary);
+            --bg-button-update-hover: var(--color-primary-hover);
+            --bg-cascade-button: var(--color-secondary);
+            --bg-cascade-button-hover: var(--color-secondary-hover);
+            --bg-cascade-delete-button: var(--color-danger);
+            --bg-cascade-delete-button-hover: var(--color-danger-hover);
+            --bg-button-header-delete: var(--color-danger);
+            --bg-button-header-delete-hover: var(--color-danger-hover);
+            --bg-button-header-copy: var(--color-secondary);
+            --bg-button-header-copy-hover: var(--color-secondary-hover);
+            --bg-code-copy-button: var(--color-secondary);
             --bg-code-copy-button-hover: var(--bg-button-action-hover);
             --text-code-copy-button: var(--text-light);
 
@@ -243,6 +269,17 @@
         }
 
         body.pastel-pink-mode {
+            /* === 基本カラーパレット（4色のみ） === */
+            --color-primary: #ec4899;
+            --color-primary-hover: #db2777;
+            --color-secondary: #d1a3b3;
+            --color-secondary-hover: #b88a9a;
+            --color-success: #10b981;
+            --color-success-hover: #059669;
+            --color-danger: #ef4444;
+            --color-danger-hover: #dc2626;
+
+            /* === 背景色 === */
             --bg-primary: #fff5f8;
             --bg-secondary: #ffe6ea;
             --bg-tertiary: #fff0f3;
@@ -252,33 +289,35 @@
             --bg-model-message: #f3e8ff;
             --bg-system-message: #ffeef2;
             --bg-error-message: #ffccd5;
-            --bg-button: #ff8fab;
-            --bg-button-rgb: 255, 143, 171;
-            --bg-button-hover: #ff7096;
+
+            /* === ボタン色（基本色を参照） === */
+            --bg-button: var(--color-primary);
+            --bg-button-rgb: 236, 72, 153;
+            --bg-button-hover: var(--color-primary-hover);
             --bg-button-disabled: #fcc2d7;
-            --bg-button-action: #ffb3c1;
-            --bg-button-action-hover: #ffa8b9;
-            --bg-button-delete: #ff6b6b;
-            --bg-button-delete-hover: #f06060;
-            --bg-button-retry: #a0eade;
-            --bg-button-retry-hover: #88d8c0;
-            --bg-button-edit: #ffc974;
-            --bg-button-edit-hover: #ffbd59;
-            --bg-button-copy: #e5a9f0;
-            --bg-button-copy-hover: #d998e3;
-            --bg-button-paste: #b2e0ff;
-            --bg-button-paste-hover: #a1d5f7;
-            --bg-button-duplicate: #ffdaab;
-            --bg-button-duplicate-hover: #ffce96;
-            --bg-button-export: #c8a2c8;
-            --bg-button-export-hover: #b991b9;
-            --bg-button-save: #90ee90;
-            --bg-button-save-hover: #78dd78;
-            --bg-button-cancel: #ff9aa2;
-            --bg-button-cancel-hover: #ff868e;
-            --bg-button-update: #ff9a8b;
-            --bg-button-update-hover: #ff8773;
-            --bg-header: #ff8fab;
+            --bg-button-action: var(--color-secondary);
+            --bg-button-action-hover: var(--color-secondary-hover);
+            --bg-button-delete: var(--color-danger);
+            --bg-button-delete-hover: var(--color-danger-hover);
+            --bg-button-retry: var(--color-success);
+            --bg-button-retry-hover: var(--color-success-hover);
+            --bg-button-edit: var(--color-secondary);
+            --bg-button-edit-hover: var(--color-secondary-hover);
+            --bg-button-copy: var(--color-secondary);
+            --bg-button-copy-hover: var(--color-secondary-hover);
+            --bg-button-paste: var(--color-secondary);
+            --bg-button-paste-hover: var(--color-secondary-hover);
+            --bg-button-duplicate: var(--color-secondary);
+            --bg-button-duplicate-hover: var(--color-secondary-hover);
+            --bg-button-export: var(--color-primary);
+            --bg-button-export-hover: var(--color-primary-hover);
+            --bg-button-save: #10b981;
+            --bg-button-save-hover: #059669;
+            --bg-button-cancel: #ef4444;
+            --bg-button-cancel-hover: #dc2626;
+            --bg-button-update: #ec4899;
+            --bg-button-update-hover: #db2777;
+            --bg-header: #ec4899;
             --overlay-base-rgb: 255, 245, 248;
             --bg-memo: #fffafb;
             --bg-cascade-button: var(--bg-button-action);
@@ -347,6 +386,17 @@
         }
 
         body.pastel-blue-mode {
+            /* === 基本カラーパレット（4色のみ） === */
+            --color-primary: #60a5fa;
+            --color-primary-hover: #3b82f6;
+            --color-secondary: #94a3b8;
+            --color-secondary-hover: #64748b;
+            --color-success: #10b981;
+            --color-success-hover: #059669;
+            --color-danger: #ef4444;
+            --color-danger-hover: #dc2626;
+
+            /* === 背景色 === */
             --bg-primary: #f0f8ff;
             --bg-secondary: #e0f0ff;
             --bg-tertiary: #eaf5ff;
@@ -356,47 +406,49 @@
             --bg-model-message: #e0e8ff;
             --bg-system-message: #e6f2ff;
             --bg-error-message: #d1e9ff;
-            --bg-button: #87cefa;
-            --bg-button-rgb: 135, 206, 250;
-            --bg-button-hover: #70b8e8;
-            --bg-button-disabled: #b0dfff;
-            --bg-button-action: #add8e6;
-            --bg-button-action-hover: #9ccce0;
-            --bg-button-delete: #ff7f7f;
-            --bg-button-delete-hover: #ff6a6a;
-            --bg-button-retry: #98fb98;
-            --bg-button-retry-hover: #82f082;
-            --bg-button-edit: #ffe082;
-            --bg-button-edit-hover: #ffda6b;
-            --bg-button-copy: #bca0dc;
-            --bg-button-copy-hover: #ae8fcf;
-            --bg-button-paste: #a0cfd8;
-            --bg-button-paste-hover: #8ebfc9;
-            --bg-button-duplicate: #c1e1c1;
-            --bg-button-duplicate-hover: #add6ad;
-            --bg-button-export: #b0c4de;
-            --bg-button-export-hover: #a0b7d3;
-            --bg-button-save: #90ee90;
-            --bg-button-save-hover: #78dd78;
-            --bg-button-cancel: #ff94a0;
-            --bg-button-cancel-hover: #ff808c;
-            --bg-button-update: #89cff0;
-            --bg-button-update-hover: #70c0e0;
-            --bg-header: #87cefa;
-            --overlay-base-rgb: 240, 248, 255;
             --bg-memo: #f5faff;
-            --bg-cascade-button: var(--bg-button-action);
-            --bg-cascade-button-hover: var(--bg-button-action-hover);
-            --bg-cascade-delete-button: var(--bg-button-delete);
-            --bg-cascade-delete-button-hover: var(--bg-button-delete-hover);
-            --text-cascade-indicator: var(--text-secondary);
-            --bg-button-header-delete: var(--bg-button-delete);
-            --bg-button-header-delete-hover: var(--bg-button-delete-hover);
-            --bg-button-header-copy: var(--bg-button-copy);
-            --bg-button-header-copy-hover: var(--bg-button-copy-hover);
-            --bg-code-copy-button: var(--bg-button-action);
-            --bg-code-copy-button-hover: var(--bg-button-action-hover);
+            --bg-header: var(--color-primary);
+            --overlay-base-rgb: 240, 248, 255;
+
+            /* === ボタン色（基本色を参照） === */
+            --bg-button: var(--color-primary);
+            --bg-button-rgb: 96, 165, 250;
+            --bg-button-hover: var(--color-primary-hover);
+            --bg-button-disabled: #b0dfff;
+            --bg-button-action: var(--color-secondary);
+            --bg-button-action-hover: var(--color-secondary-hover);
+            --bg-button-delete: var(--color-danger);
+            --bg-button-delete-hover: var(--color-danger-hover);
+            --bg-button-retry: var(--color-success);
+            --bg-button-retry-hover: var(--color-success-hover);
+            --bg-button-edit: var(--color-secondary);
+            --bg-button-edit-hover: var(--color-secondary-hover);
+            --bg-button-copy: var(--color-secondary);
+            --bg-button-copy-hover: var(--color-secondary-hover);
+            --bg-button-paste: var(--color-secondary);
+            --bg-button-paste-hover: var(--color-secondary-hover);
+            --bg-button-duplicate: var(--color-secondary);
+            --bg-button-duplicate-hover: var(--color-secondary-hover);
+            --bg-button-export: var(--color-primary);
+            --bg-button-export-hover: var(--color-primary-hover);
+            --bg-button-save: var(--color-success);
+            --bg-button-save-hover: var(--color-success-hover);
+            --bg-button-cancel: var(--color-danger);
+            --bg-button-cancel-hover: var(--color-danger-hover);
+            --bg-button-update: var(--color-primary);
+            --bg-button-update-hover: var(--color-primary-hover);
+            --bg-cascade-button: var(--color-secondary);
+            --bg-cascade-button-hover: var(--color-secondary-hover);
+            --bg-cascade-delete-button: var(--color-danger);
+            --bg-cascade-delete-button-hover: var(--color-danger-hover);
+            --bg-button-header-delete: var(--color-danger);
+            --bg-button-header-delete-hover: var(--color-danger-hover);
+            --bg-button-header-copy: var(--color-secondary);
+            --bg-button-header-copy-hover: var(--color-secondary-hover);
+            --bg-code-copy-button: var(--color-secondary);
+            --bg-code-copy-button-hover: var(--color-secondary-hover);
             --text-code-copy-button: var(--text-light);
+            --text-cascade-indicator: var(--text-secondary);
 
             --text-primary: #3a5679;
             --text-secondary: #6b87a9;
@@ -451,6 +503,17 @@
         }
 
         body.pastel-yellow-mode {
+            /* === 基本カラーパレット（4色のみ） === */
+            --color-primary: #eab308;
+            --color-primary-hover: #ca8a04;
+            --color-secondary: #a8a29e;
+            --color-secondary-hover: #78716c;
+            --color-success: #10b981;
+            --color-success-hover: #059669;
+            --color-danger: #ef4444;
+            --color-danger-hover: #dc2626;
+
+            /* === 背景色 === */
             --bg-primary: #fffefa;
             --bg-secondary: #fffacd;
             --bg-tertiary: #fff8dc;
@@ -460,33 +523,35 @@
             --bg-model-message: #ffe4b5;
             --bg-system-message: #fffbea;
             --bg-error-message: #ffebcd;
-            --bg-button: #ffd700;
-            --bg-button-rgb: 255, 215, 0;
-            --bg-button-hover: #ffc700;
+
+            /* === ボタン色（基本色を参照） === */
+            --bg-button: var(--color-primary);
+            --bg-button-rgb: 234, 179, 8;
+            --bg-button-hover: var(--color-primary-hover);
             --bg-button-disabled: #fff0b3;
-            --bg-button-action: #ffec8b;
-            --bg-button-action-hover: #ffdf60;
-            --bg-button-delete: #ffa07a;
-            --bg-button-delete-hover: #ff8c69;
-            --bg-button-retry: #b0e57c;
-            --bg-button-retry-hover: #9acd32;
-            --bg-button-edit: #ffa500;
-            --bg-button-edit-hover: #ff8c00;
-            --bg-button-copy: #ffb6c1;
-            --bg-button-copy-hover: #ffaab5;
-            --bg-button-paste: #add8e6;
-            --bg-button-paste-hover: #9ccce0;
-            --bg-button-duplicate: #f0e68c;
-            --bg-button-duplicate-hover: #eadc67;
-            --bg-button-export: #fff0b3;
-            --bg-button-export-hover: #ffe78a;
-            --bg-button-save: #98fb98;
-            --bg-button-save-hover: #82f082;
-            --bg-button-cancel: #ffdab9;
-            --bg-button-cancel-hover: #ffceaa;
-            --bg-button-update: #ffcc5c;
-            --bg-button-update-hover: #ffbf40;
-            --bg-header: #ffd700;
+            --bg-button-action: var(--color-secondary);
+            --bg-button-action-hover: var(--color-secondary-hover);
+            --bg-button-delete: var(--color-danger);
+            --bg-button-delete-hover: var(--color-danger-hover);
+            --bg-button-retry: var(--color-success);
+            --bg-button-retry-hover: var(--color-success-hover);
+            --bg-button-edit: var(--color-secondary);
+            --bg-button-edit-hover: var(--color-secondary-hover);
+            --bg-button-copy: var(--color-secondary);
+            --bg-button-copy-hover: var(--color-secondary-hover);
+            --bg-button-paste: var(--color-secondary);
+            --bg-button-paste-hover: var(--color-secondary-hover);
+            --bg-button-duplicate: var(--color-secondary);
+            --bg-button-duplicate-hover: var(--color-secondary-hover);
+            --bg-button-export: var(--color-primary);
+            --bg-button-export-hover: var(--color-primary-hover);
+            --bg-button-save: var(--color-success);
+            --bg-button-save-hover: var(--color-success-hover);
+            --bg-button-cancel: var(--color-danger);
+            --bg-button-cancel-hover: var(--color-danger-hover);
+            --bg-button-update: var(--color-primary);
+            --bg-button-update-hover: var(--color-primary-hover);
+            --bg-header: #eab308;
             --overlay-base-rgb: 255, 254, 250;
             --bg-memo: #fffef0;
             --bg-cascade-button: var(--bg-button-action);
@@ -539,6 +604,17 @@
         }
 
         body.pastel-purple-mode {
+            /* === 基本カラーパレット（4色のみ） === */
+            --color-primary: #a855f7;
+            --color-primary-hover: #9333ea;
+            --color-secondary: #a78bba;
+            --color-secondary-hover: #8b6fa0;
+            --color-success: #10b981;
+            --color-success-hover: #059669;
+            --color-danger: #ef4444;
+            --color-danger-hover: #dc2626;
+
+            /* === 背景色 === */
             --bg-primary: #f3e5f5;
             --bg-secondary: #e1bee7;
             --bg-tertiary: #ede7f6;
@@ -548,47 +624,49 @@
             --bg-model-message: #c5cae9;
             --bg-system-message: #f3e8fd;
             --bg-error-message: #f8bbd0;
-            --bg-button: #ab47bc;
-            --bg-button-rgb: 171, 71, 188;
-            --bg-button-hover: #9c27b0;
-            --bg-button-disabled: #ce93d8;
-            --bg-button-action: #ba68c8;
-            --bg-button-action-hover: #a54eb4;
-            --bg-button-delete: #ec407a;
-            --bg-button-delete-hover: #d81b60;
-            --bg-button-retry: #81c784;
-            --bg-button-retry-hover: #66bb6a;
-            --bg-button-edit: #ffb74d;
-            --bg-button-edit-hover: #ffa726;
-            --bg-button-copy: #7e57c2;
-            --bg-button-copy-hover: #673ab7;
-            --bg-button-paste: #64b5f6;
-            --bg-button-paste-hover: #42a5f5;
-            --bg-button-duplicate: #9575cd;
-            --bg-button-duplicate-hover: #7e57c2;
-            --bg-button-export: #b39ddb;
-            --bg-button-export-hover: #9d80cf;
-            --bg-button-save: #a5d6a7;
-            --bg-button-save-hover: #81c784;
-            --bg-button-cancel: #ef9a9a;
-            --bg-button-cancel-hover: #e57373;
-            --bg-button-update: #7986cb;
-            --bg-button-update-hover: #5c6bc0;
-            --bg-header: #ab47bc;
-            --overlay-base-rgb: 243, 229, 245;
             --bg-memo: #fbfaff;
-            --bg-cascade-button: var(--bg-button-action);
-            --bg-cascade-button-hover: var(--bg-button-action-hover);
-            --bg-cascade-delete-button: var(--bg-button-delete);
-            --bg-cascade-delete-button-hover: var(--bg-button-delete-hover);
-            --text-cascade-indicator: var(--text-secondary);
-            --bg-button-header-delete: var(--bg-button-delete);
-            --bg-button-header-delete-hover: var(--bg-button-delete-hover);
-            --bg-button-header-copy: var(--bg-button-copy);
-            --bg-button-header-copy-hover: var(--bg-button-copy-hover);
-            --bg-code-copy-button: var(--bg-button-action);
-            --bg-code-copy-button-hover: var(--bg-button-action-hover);
+            --bg-header: var(--color-primary);
+            --overlay-base-rgb: 243, 229, 245;
+
+            /* === ボタン色（基本色を参照） === */
+            --bg-button: var(--color-primary);
+            --bg-button-rgb: 168, 85, 247;
+            --bg-button-hover: var(--color-primary-hover);
+            --bg-button-disabled: #ce93d8;
+            --bg-button-action: var(--color-secondary);
+            --bg-button-action-hover: var(--color-secondary-hover);
+            --bg-button-delete: var(--color-danger);
+            --bg-button-delete-hover: var(--color-danger-hover);
+            --bg-button-retry: var(--color-success);
+            --bg-button-retry-hover: var(--color-success-hover);
+            --bg-button-edit: var(--color-secondary);
+            --bg-button-edit-hover: var(--color-secondary-hover);
+            --bg-button-copy: var(--color-secondary);
+            --bg-button-copy-hover: var(--color-secondary-hover);
+            --bg-button-paste: var(--color-secondary);
+            --bg-button-paste-hover: var(--color-secondary-hover);
+            --bg-button-duplicate: var(--color-secondary);
+            --bg-button-duplicate-hover: var(--color-secondary-hover);
+            --bg-button-export: var(--color-primary);
+            --bg-button-export-hover: var(--color-primary-hover);
+            --bg-button-save: var(--color-success);
+            --bg-button-save-hover: var(--color-success-hover);
+            --bg-button-cancel: var(--color-danger);
+            --bg-button-cancel-hover: var(--color-danger-hover);
+            --bg-button-update: var(--color-primary);
+            --bg-button-update-hover: var(--color-primary-hover);
+            --bg-cascade-button: var(--color-secondary);
+            --bg-cascade-button-hover: var(--color-secondary-hover);
+            --bg-cascade-delete-button: var(--color-danger);
+            --bg-cascade-delete-button-hover: var(--color-danger-hover);
+            --bg-button-header-delete: var(--color-danger);
+            --bg-button-header-delete-hover: var(--color-danger-hover);
+            --bg-button-header-copy: var(--color-secondary);
+            --bg-button-header-copy-hover: var(--color-secondary-hover);
+            --bg-code-copy-button: var(--color-secondary);
+            --bg-code-copy-button-hover: var(--color-secondary-hover);
             --text-code-copy-button: var(--text-light);
+            --text-cascade-indicator: var(--text-secondary);
 
             --text-primary: #4a148c;
             --text-secondary: #6a1b9a;
@@ -627,6 +705,17 @@
         }
 
         body.pastel-rainbow-mode {
+            /* === 基本カラーパレット（レインボーモードは各ボタンに異なる色） === */
+            --color-primary: #ff80c0;
+            --color-primary-hover: #ff60a0;
+            --color-secondary: #80d0ff;
+            --color-secondary-hover: #60b0e0;
+            --color-success: #80ff80;
+            --color-success-hover: #60e060;
+            --color-danger: #ff8080;
+            --color-danger-hover: #ff6060;
+
+            /* === 背景色 === */
             --bg-primary: #fdfdfd;
             --bg-secondary: #f5f5f5;
             --bg-tertiary: #fafafa;
@@ -636,16 +725,21 @@
             --bg-model-message: #e0f0ff;
             --bg-system-message: #fff0f8;
             --bg-error-message: #fff8e0;
-            --bg-button: #ff80c0;
+            --bg-memo: #f0fff0;
+            --bg-header: linear-gradient(to right, #ffadad, #ffd6a5, #fdffb6, #caffbf, #9bf6ff, #a0c4ff, #bdb2ff, #ffc6ff, #ffadad);
+            --overlay-base-rgb: 253, 253, 253;
+
+            /* === ボタン色（レインボーモードは多彩な色を使用） === */
+            --bg-button: var(--color-primary);
             --bg-button-rgb: 255, 128, 192;
-            --bg-button-hover: #ff60a0;
-            --bg-button-disabled: #ffc0e0;
-            --bg-button-action: #80d0ff;
-            --bg-button-action-hover: #60b0e0;
-            --bg-button-delete: #ff8080;
-            --bg-button-delete-hover: #ff6060;
-            --bg-button-retry: #80ff80;
-            --bg-button-retry-hover: #60e060;
+            --bg-button-hover: var(--color-primary-hover);
+            --bg-button-disabled: #e0e0e0;
+            --bg-button-action: var(--color-secondary);
+            --bg-button-action-hover: var(--color-secondary-hover);
+            --bg-button-delete: var(--color-danger);
+            --bg-button-delete-hover: var(--color-danger-hover);
+            --bg-button-retry: var(--color-success);
+            --bg-button-retry-hover: var(--color-success-hover);
             --bg-button-edit: #ffc080;
             --bg-button-edit-hover: #ffa060;
             --bg-button-copy: #c080ff;
@@ -662,11 +756,8 @@
             --bg-button-cancel-hover: #ffa0a0;
             --bg-button-update: #80c0ff;
             --bg-button-update-hover: #60a0e0;
-            --bg-header: linear-gradient(to right, #ffadad, #ffd6a5, #fdffb6, #caffbf, #9bf6ff, #a0c4ff, #bdb2ff, #ffc6ff, #ffadad);
-            --overlay-base-rgb: 253, 253, 253;
-            --bg-memo: #f0fff0;
-            --bg-code-copy-button: var(--bg-button-action);
-            --bg-code-copy-button-hover: var(--bg-button-action-hover);
+            --bg-code-copy-button: var(--color-secondary);
+            --bg-code-copy-button-hover: var(--color-secondary-hover);
             --text-code-copy-button: var(--text-light);
 
             --text-primary: #333;
