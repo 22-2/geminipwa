@@ -4168,24 +4168,24 @@
 
         <div id="chat-screen" class="screen active">
             <header class="app-header">
-                <button id="goto-history-btn" class="header-button" aria-label="履歴一覧へ">☰</button>
+                <button id="goto-history-btn" class="header-button" aria-label="履歴一覧へ"><i data-lucide="menu"></i></button>
                 <h1 id="chat-title">新規チャット</h1>
-                <button id="new-chat-btn" class="new-chat-button" title="新規チャットを開始">新</button>
-                <button id="delete-session-btn" class="action-button-in-header" title="現在のチャットを削除">削</button>
-                <button id="copy-session-btn" class="action-button-in-header" title="チャット全体をコピー">コ</button>
+                <button id="new-chat-btn" class="new-chat-button" title="新規チャットを開始"><i data-lucide="plus"></i></button>
+                <button id="delete-session-btn" class="action-button-in-header" title="現在のチャットを削除"><i data-lucide="trash-2"></i></button>
+                <button id="copy-session-btn" class="action-button-in-header" title="チャット全体をコピー"><i data-lucide="copy"></i></button>
                 <button id="header-api-provider-toggle-btn" class="header-button api-provider-toggle-btn"
                     title="APIプロバイダー切替"></button>
                 <button id="scroll-to-top-btn" class="header-button scroll-jump-button" aria-label="最上部へスクロール"
-                    title="最上部へ">🔼</button>
+                    title="最上部へ"><i data-lucide="chevron-up"></i></button>
                 <button id="scroll-to-bottom-btn" class="header-button scroll-jump-button" aria-label="最下部へスクロール"
-                    title="最下部へ">🔽</button>
+                    title="最下部へ"><i data-lucide="chevron-down"></i></button>
                 <button id="toggle-all-content-btn" class="header-button" aria-label="全メッセージ表示切替"
-                    title="全メッセージの表示/非表示を切り替え">🖼️</button>
-                <button id="toggle-clipboard-stack-btn" class="header-button" aria-label="クリップボードスタックを開閉">🗒️</button>
-                <button id="toggle-memo-btn" class="header-button" aria-label="メモを開閉">📝</button>
+                    title="全メッセージの表示/非表示を切り替え"><i data-lucide="eye"></i></button>
+                <button id="toggle-clipboard-stack-btn" class="header-button" aria-label="クリップボードスタックを開閉"><i data-lucide="clipboard"></i></button>
+                <button id="toggle-memo-btn" class="header-button" aria-label="メモを開閉"><i data-lucide="file-text"></i></button>
                 <button id="twin-engine-summary-btn" class="header-button hidden" aria-label="要約セッション履歴を開閉"
-                    title="要約セッション履歴">⚗️</button>
-                <button id="goto-settings-btn" class="header-button" aria-label="設定へ">⚙</button>
+                    title="要約セッション履歴"><i data-lucide="flask-conical"></i></button>
+                <button id="goto-settings-btn" class="header-button" aria-label="設定へ"><i data-lucide="settings"></i></button>
             </header>
 
             <div id="memo-area" class="hidden">
@@ -4241,13 +4241,13 @@
                 <textarea id="user-input" placeholder="メッセージを入力..." rows="1" aria-label="メッセージ入力"></textarea>
                 <button id="attach-file-btn" title="ファイルを添付" class="footer-action-button">+<span
                         class="attachment-badge"></span></button>
-                <button id="send-button" title="送信">送</button>
+                <button id="send-button" title="送信"><i data-lucide="send"></i></button>
             </footer>
         </div>
 
         <div id="history-screen" class="screen">
             <header class="app-header">
-                <button id="back-to-chat-from-history" class="header-button" aria-label="チャットへ戻る">＞</button>
+                <button id="back-to-chat-from-history" class="header-button" aria-label="チャットへ戻る"><i data-lucide="arrow-left"></i></button>
                 <h1 id="history-title">履歴一覧</h1>
 
                 <button id="export-all-sessions-btn" class="header-save-button history-action-button gold"
@@ -4273,11 +4273,11 @@
                             </div>
                             <div class="history-item-actions">
                                 <button class="js-link-session-btn" title="セッションをリンク/解除"
-                                    style="font-size: 16px; padding: 6px 8px; background-color: var(--bg-button-action);">🔗</button>
-                                <button class="js-edit-title-btn" title="タイトル編集">✎</button>
-                                <button class="js-export-btn" title="出力">出力</button>
-                                <button class="js-duplicate-btn" title="複製">複製</button>
-                                <button class="js-delete-btn" title="削除">削除</button>
+                                    style="font-size: 16px; padding: 6px 8px; background-color: var(--bg-button-action);"><i data-lucide="link"></i></button>
+                                <button class="js-edit-title-btn" title="タイトル編集"><i data-lucide="edit"></i></button>
+                                <button class="js-export-btn" title="出力"><i data-lucide="download"></i></button>
+                                <button class="js-duplicate-btn" title="複製"><i data-lucide="copy"></i></button>
+                                <button class="js-delete-btn" title="削除"><i data-lucide="trash-2"></i></button>
                             </div>
                         </div>
                     </li>
@@ -4289,7 +4289,7 @@
 
         <div id="settings-screen" class="screen">
             <header class="app-header">
-                <button id="back-to-chat-from-settings" class="header-button" aria-label="チャットへ戻る">＜</button>
+                <button id="back-to-chat-from-settings" class="header-button" aria-label="チャットへ戻る"><i data-lucide="arrow-left"></i></button>
                 <h1>設定</h1>
                 <span id="settings-save-notice" class="header-notice">※反映には保存が必要</span>
                 <button class="js-save-settings-btn header-save-button" title="設定を保存">設定を保存</button>
@@ -8549,17 +8549,17 @@
                     }
 
                     const editButton = document.createElement('button');
-                    editButton.textContent = '編集'; editButton.title = 'メッセージを編集'; editButton.classList.add('js-edit-btn');
+                    editButton.innerHTML = '<i data-lucide="edit"></i>'; editButton.title = 'メッセージを編集'; editButton.classList.add('js-edit-btn');
                     editButton.onclick = () => appLogic.startEditMessage(index, messageDiv);
                     actionsDiv.appendChild(editButton);
 
                     const deleteButton = document.createElement('button');
-                    deleteButton.textContent = '削除'; deleteButton.title = 'この会話ターンを削除'; deleteButton.classList.add('js-delete-btn');
+                    deleteButton.innerHTML = '<i data-lucide="trash-2"></i>'; deleteButton.title = 'この会話ターンを削除'; deleteButton.classList.add('js-delete-btn');
                     deleteButton.onclick = () => appLogic.deleteMessage(index);
                     actionsDiv.appendChild(deleteButton);
 
                     const copyButton = document.createElement('button');
-                    copyButton.textContent = 'コピー';
+                    copyButton.innerHTML = '<i data-lucide="copy"></i>';
                     copyButton.title = 'テキストをコピー';
                     copyButton.classList.add('js-copy-btn');
                     copyButton.onclick = (event) => {
@@ -8570,7 +8570,7 @@
 
                     if (role === 'user' || role === 'model') {
                         const retryButton = document.createElement('button');
-                        retryButton.textContent = 'リトライ';
+                        retryButton.innerHTML = '<i data-lucide="refresh-cw"></i>';
                         retryButton.title = 'このメッセージから再生成';
                         retryButton.classList.add('js-retry-btn');
                         retryButton.onclick = () => {
@@ -8600,6 +8600,11 @@
                         actionsDiv.appendChild(tokenSpan);
                     }
                     messageDiv.appendChild(actionsDiv);
+
+                    // アクションボタンのアイコンを初期化
+                    if (typeof initLucideIcons === 'function') {
+                        initLucideIcons(actionsDiv);
+                    }
                 }
 
                 if (isStreamingPlaceholder) {
@@ -9252,6 +9257,11 @@
 
                             elements.historyList.appendChild(li);
                         });
+
+                        // 履歴リストのアイコンを初期化
+                        if (typeof initLucideIcons === 'function') {
+                            initLucideIcons(elements.historyList);
+                        }
                     } else {
                         elements.noHistoryMessage.classList.remove('hidden');
                         elements.historyTitle.textContent = '履歴一覧';
@@ -18612,6 +18622,42 @@
                 }, 100);
             });
         })();
+
+        // Lucide アイコンの初期化（使用するアイコンのみ）
+        function initLucideIcons(element = document) {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons({
+                    icons: {
+                        Edit: lucide.Edit,
+                        Trash2: lucide.Trash2,
+                        Copy: lucide.Copy,
+                        RefreshCw: lucide.RefreshCw,
+                        Send: lucide.Send,
+                        Download: lucide.Download,
+                        Link: lucide.Link,
+                        Menu: lucide.Menu,
+                        Plus: lucide.Plus,
+                        ChevronUp: lucide.ChevronUp,
+                        ChevronDown: lucide.ChevronDown,
+                        Eye: lucide.Eye,
+                        Clipboard: lucide.Clipboard,
+                        FileText: lucide.FileText,
+                        FlaskConical: lucide.FlaskConical,
+                        Settings: lucide.Settings,
+                        ArrowLeft: lucide.ArrowLeft
+                    },
+                    nameAttr: 'data-lucide',
+                    attrs: {
+                        'stroke-width': 2,
+                        'width': 18,
+                        'height': 18
+                    }
+                }, element);
+            }
+        }
+
+        // 初回読み込み時
+        initLucideIcons();
     </script>
 </body>
 
