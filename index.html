@@ -8602,17 +8602,17 @@
                         actionsDiv.appendChild(tokenSpan);
                     }
                     messageDiv.appendChild(actionsDiv);
-
-                    // アクションボタンのアイコンを初期化
-                    if (typeof initLucideIcons === 'function') {
-                        initLucideIcons(actionsDiv);
-                    }
                 }
 
                 if (isStreamingPlaceholder) {
                     messageDiv.id = `streaming-message-${index}`;
                 }
                 elements.messageContainer.appendChild(messageDiv);
+
+                // アイコンを初期化
+                if (typeof window.initLucideIcons === 'function') {
+                    window.initLucideIcons(messageDiv);
+                }
             },
             updateMemoStackHeightSettingsVisibility() {
                 const showMemoBtn = elements.showMemoButtonToggle.checked;
@@ -9260,9 +9260,9 @@
                             elements.historyList.appendChild(li);
                         });
 
-                        // 履歴リストのアイコンを初期化
-                        if (typeof initLucideIcons === 'function') {
-                            initLucideIcons(elements.historyList);
+                        // アイコンを初期化
+                        if (typeof window.initLucideIcons === 'function') {
+                            window.initLucideIcons(elements.historyList);
                         }
                     } else {
                         elements.noHistoryMessage.classList.remove('hidden');
@@ -18626,7 +18626,7 @@
         })();
 
         // Lucide アイコンの初期化（使用するアイコンのみ）
-        function initLucideIcons(element = document) {
+        window.initLucideIcons = function(element = document) {
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons({
                     icons: {
@@ -18656,7 +18656,7 @@
                     }
                 }, element);
             }
-        }
+        };
 
         // 初回読み込み時
         initLucideIcons();
