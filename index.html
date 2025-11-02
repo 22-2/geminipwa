@@ -10076,6 +10076,9 @@
                 };
                 const currentProviderInfo = providerMap[state.settings.apiProvider] || { text: '??', title: 'Unknown', className: '' };
 
+                // 有効なプロバイダーの数をカウント
+                const enabledProvidersCount = Object.values(state.settings.apiProviderCycle).filter(enabled => enabled === true).length;
+
                 [elements.headerApiProviderToggleBtn, elements.footerApiProviderToggleBtn].forEach(button => {
                     if (button) {
                         button.textContent = currentProviderInfo.text;
@@ -10083,6 +10086,18 @@
                         button.classList.remove('gemini', 'deepseek', 'claude', 'openai', 'xai', 'llmaggregator', 'dummy');
                         if (currentProviderInfo.className) {
                             button.classList.add(currentProviderInfo.className);
+                        }
+
+                        // プロバイダーが1つだけの場合は非表示
+                        if (enabledProvidersCount <= 1) {
+                            button.classList.add('hidden');
+                        } else {
+                            // 設定に応じて表示/非表示を切り替え
+                            if (button === elements.footerApiProviderToggleBtn) {
+                                button.classList.toggle('hidden', !state.settings.showApiProviderToggleFooter);
+                            } else if (button === elements.headerApiProviderToggleBtn) {
+                                button.classList.toggle('hidden', !state.settings.showApiProviderToggleHeader);
+                            }
                         }
                     }
                 });
