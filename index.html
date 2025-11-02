@@ -1343,6 +1343,25 @@
 
         #chat-screen .app-header {
             z-index: 2;
+            position: fixed;
+            top: -100px;
+            left: 0;
+            right: 0;
+            transition: top 0.3s ease;
+        }
+
+        #chat-screen .app-header.visible {
+            top: 0;
+        }
+
+        #chat-screen .header-trigger-zone {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            z-index: 1;
+            pointer-events: all;
         }
 
         #chat-screen .chat-input-area {
@@ -18540,6 +18559,43 @@
         window.errorRecovery = errorRecovery;
 
         appLogic.initializeApp();
+
+        // #chat-screenのヘッダーを上部にマウスを持っていったときだけ表示
+        (function() {
+            const chatScreen = document.getElementById('chat-screen');
+            const appHeader = chatScreen.querySelector('.app-header');
+            let hideTimeout;
+
+            // マウスが画面上部に来たときにヘッダーを表示
+            document.addEventListener('mousemove', function(e) {
+                if (!chatScreen.classList.contains('active')) return;
+
+                // マウスが上部50pxにある場合
+                if (e.clientY < 50) {
+                    appHeader.classList.add('visible');
+                    clearTimeout(hideTimeout);
+                } else if (e.clientY > 100) {
+                    // マウスが100px以上下にある場合、少し遅延してから非表示
+                    clearTimeout(hideTimeout);
+                    hideTimeout = setTimeout(() => {
+                        appHeader.classList.remove('visible');
+                    }, 100);
+                }
+            });
+
+            // ヘッダー自体にマウスがある間は表示を維持
+            appHeader.addEventListener('mouseenter', function() {
+                clearTimeout(hideTimeout);
+                appHeader.classList.add('visible');
+            });
+
+            appHeader.addEventListener('mouseleave', function() {
+                clearTimeout(hideTimeout);
+                hideTimeout = setTimeout(() => {
+                    appHeader.classList.remove('visible');
+                }, 100);
+            });
+        })();
     </script>
 </body>
 
