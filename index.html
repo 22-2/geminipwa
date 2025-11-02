@@ -5550,6 +5550,11 @@
                                                 <option value="updatedAt">更新日時 (新しい順)</option>
                                                 <option value="createdAt">作成日時 (新しい順)</option>
                                             </select>
+                                            <hr style="margin: 10px 0; border-top: 1px solid var(--border-tertiary);">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="save-and-retry-toggle">
+                                                保存と同時にリトライ
+                                            </label>
                                         </div>
                                     </details>
 
@@ -6573,6 +6578,7 @@
             enterToSendCheckbox: document.getElementById('enter-to-send'),
             autoScrollOnNewMessageCheckbox: document.getElementById('auto-scroll-on-new-message'),
             autoScrollOnThoughtCheckbox: document.getElementById('auto-scroll-on-thought'),
+            saveAndRetryToggle: document.getElementById('save-and-retry-toggle'),
             historySortOrderSelect: document.getElementById('history-sort-order'),
             themeSelect: document.getElementById('theme-select'),
             fontFamilyInput: document.getElementById('font-family-input'),
@@ -6941,6 +6947,7 @@
                 enterToSend: true,
                 autoScrollOnNewMessage: DEFAULT_AUTO_SCROLL_ON_NEW_MESSAGE,
                 autoScrollOnThought: false,
+                saveAndRetry: false,
                 historySortOrder: 'updatedAt',
                 theme: 'light',
                 backgroundImageBlob: null,
@@ -9638,6 +9645,7 @@
                 elements.enterToSendCheckbox.checked = state.settings.enterToSend;
                 elements.autoScrollOnNewMessageCheckbox.checked = state.settings.autoScrollOnNewMessage;
                 elements.autoScrollOnThoughtCheckbox.checked = state.settings.autoScrollOnThought;
+                elements.saveAndRetryToggle.checked = state.settings.saveAndRetry;
                 elements.historySortOrderSelect.value = state.settings.historySortOrder || 'updatedAt';
                 if (elements.themeSelect) elements.themeSelect.value = state.settings.theme || 'light';
                 elements.enableSessionLinkingCheckbox.checked = state.settings.enableSessionLinking;
@@ -14631,6 +14639,7 @@
                 newSettings.enterToSend = elements.enterToSendCheckbox.checked;
                 newSettings.autoScrollOnNewMessage = elements.autoScrollOnNewMessageCheckbox.checked;
                 newSettings.autoScrollOnThought = elements.autoScrollOnThoughtCheckbox.checked;
+                newSettings.saveAndRetry = elements.saveAndRetryToggle.checked;
                 newSettings.historySortOrder = elements.historySortOrderSelect.value;
                 newSettings.theme = elements.themeSelect.value;
                 newSettings.enableSessionLinking = elements.enableSessionLinkingCheckbox.checked;
@@ -15385,6 +15394,11 @@
                     }
                 } catch (error) {
                     await uiUtils.showCustomAlert("メッセージ編集後のチャット保存に失敗しました。");
+                }
+
+                // 保存と同時にリトライ機能
+                if (state.settings.saveAndRetry && originalMessage.role === 'user') {
+                    await this.retryFromMessage(index);
                 }
             },
             cancelEditMessage(index, messageElement = null) {
