@@ -1955,7 +1955,7 @@
         .message-actions {
             position: absolute;
             bottom: -30px;
-            display: none;
+            display: flex;
             flex-wrap: nowrap;
             gap: 5px;
             background-color: rgba(var(--message-actions-base-rgb), var(--message-actions-bg-opacity));
@@ -1963,6 +1963,7 @@
             border-radius: 5px;
             box-shadow: 0 1px 3px var(--shadow-primary);
             z-index: 2;
+            opacity: 0;
             transition: opacity 0.2s ease, background-color 0.3s ease;
         }
 
@@ -2929,9 +2930,10 @@
             transform: scale(1.01);
         }
 
-        .message:hover .message-actions,
-        .message.show-actions .message-actions {
-            display: flex;
+        .message-actions:hover,
+        .message:has(.message-actions):hover .message-actions {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .message.model:hover .message-cascade-controls,
