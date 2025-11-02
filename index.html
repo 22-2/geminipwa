@@ -11048,7 +11048,7 @@
                     }
                     elements.appVersionSpan.textContent = APP_VERSION;
                     window.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); });
-                    registerServiceWorker();
+                    // registerServiceWorker();
 
                     await dbUtils.openDB();
                     await dbUtils.loadSettings();
