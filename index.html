@@ -982,6 +982,8 @@
             box-shadow: none !important;
             border: 1px solid transparent;
             transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            font-size: 14px;
+            padding: 4px 6px;
         }
 
         .app-header #toggle-clipboard-stack-btn:hover,
@@ -990,8 +992,7 @@
         .app-header .scroll-jump-button:hover,
         .app-header #toggle-all-content-btn:hover,
         .app-header .api-provider-toggle-btn:hover {
-            background-color: rgba(255, 255, 255, 0.1) !important;
-            border-color: rgba(255, 255, 255, 0.3) !important;
+            opacity: 0.7;
         }
 
         body.pastel-yellow-mode .app-header #toggle-clipboard-stack-btn,
@@ -1009,8 +1010,7 @@
         body.pastel-yellow-mode .app-header .scroll-jump-button:hover,
         body.pastel-yellow-mode .app-header #toggle-all-content-btn:hover,
         body.pastel-yellow-mode .app-header .api-provider-toggle-btn:hover {
-            background-color: rgba(0, 0, 0, 0.05) !important;
-            border-color: rgba(0, 0, 0, 0.1) !important;
+            opacity: 0.7;
         }
 
         body.dark-mode .app-header #toggle-clipboard-stack-btn:hover,
@@ -1019,8 +1019,7 @@
         body.dark-mode .app-header .scroll-jump-button:hover,
         body.dark-mode .app-header #toggle-all-content-btn:hover,
         body.dark-mode .app-header .api-provider-toggle-btn:hover {
-            background-color: rgba(255, 255, 255, 0.08) !important;
-            border-color: rgba(255, 255, 255, 0.2) !important;
+            opacity: 0.7;
         }
 
         #history-screen .app-header {
@@ -1260,7 +1259,7 @@
         }
 
         .app-header #delete-session-btn:hover:not(:disabled) {
-            background-color: var(--bg-button-header-delete-hover);
+            opacity: 0.7;
         }
 
         .app-header #copy-session-btn {
@@ -1268,7 +1267,7 @@
         }
 
         .app-header #copy-session-btn:hover:not(:disabled) {
-            background-color: var(--bg-button-header-copy-hover);
+            opacity: 0.7;
         }
 
         .main-content {
@@ -1916,7 +1915,7 @@
         }
 
         .message-toggle-button:hover {
-            background-color: var(--bg-toggle-button-hover);
+            opacity: 0.8;
         }
 
         .message:hover .message-toggle-button.top,
@@ -1979,57 +1978,7 @@
             justify-content: flex-start;
         }
 
-        .message-actions button {
-            background-color: var(--bg-button-action);
-            color: var(--text-light);
-            padding: 4px 10px;
-            font-size: 12px;
-            border-radius: 4px;
-            white-space: nowrap;
-            line-height: 1.5;
-        }
 
-        body.pastel-yellow-mode .message-actions button,
-        body.pastel-yellow-mode .message-cascade-controls button,
-        body.pastel-yellow-mode .message-edit-actions button {
-            color: var(--text-light);
-        }
-
-        .message-actions button:hover {
-            background-color: var(--bg-button-action-hover);
-        }
-
-        .message-actions .js-edit-btn {
-            background-color: var(--bg-button-edit);
-        }
-
-        .message-actions .js-edit-btn:hover {
-            background-color: var(--bg-button-edit-hover);
-        }
-
-        .message-actions .js-delete-btn {
-            background-color: var(--bg-button-delete);
-        }
-
-        .message-actions .js-delete-btn:hover {
-            background-color: var(--bg-button-delete-hover);
-        }
-
-        .message-actions .js-retry-btn {
-            background-color: var(--bg-button-retry);
-        }
-
-        .message-actions .js-retry-btn:hover {
-            background-color: var(--bg-button-retry-hover);
-        }
-
-        .message-actions .js-copy-btn {
-            background-color: var(--bg-button-copy);
-        }
-
-        .message-actions .js-copy-btn:hover {
-            background-color: var(--bg-button-copy-hover);
-        }
 
         .message-cascade-controls {
             position: absolute;
@@ -2053,17 +2002,17 @@
         }
 
         .message-cascade-controls button {
-            background-color: var(--bg-cascade-button);
-            color: var(--text-light);
+            background-color: transparent;
+            color: var(--text-secondary);
             padding: 4px 8px;
-            font-size: 14px;
+            font-size: 12px;
             border-radius: 4px;
             line-height: 1;
             min-width: 25px;
         }
 
         .message-cascade-controls button:hover:not(:disabled) {
-            background-color: var(--bg-cascade-button-hover);
+            opacity: 0.7;
         }
 
         .message-cascade-controls button:disabled {
@@ -2081,12 +2030,13 @@
         }
 
         .message-cascade-controls .cascade-delete-btn {
-            background-color: var(--bg-cascade-delete-button);
+            background-color: transparent;
+            color: var(--bg-cascade-delete-button);
             margin-left: 5px;
         }
 
         .message-cascade-controls .cascade-delete-btn:hover {
-            background-color: var(--bg-cascade-delete-button-hover);
+            color: var(--bg-cascade-delete-button-hover);
         }
 
         .message.editing pre {
@@ -2157,22 +2107,22 @@
             height: 40px;
             width: 40px;
             padding: 0;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: var(--bg-button-action);
-            color: var(--text-light);
+            background-color: transparent;
+            color: var(--text-secondary);
             border-radius: 5px;
             border: none;
             cursor: pointer;
-            transition: background-color 0.2s ease, height 0.2s ease, width 0.2s ease, font-size 0.2s ease;
+            transition: opacity 0.2s ease, height 0.2s ease, width 0.2s ease, font-size 0.2s ease;
         }
 
         .footer-action-button:hover:not(:disabled) {
-            background-color: var(--bg-button-action-hover);
+            opacity: 0.7;
         }
 
         body.pastel-yellow-mode .footer-action-button {
@@ -2345,52 +2295,14 @@
             transition: min-height 0.2s ease, height 0.2s ease, padding 0.2s ease, font-size 0.2s ease;
         }
 
-        .chat-input-area button#send-button {
+        .chat-input-area #send-button {
             height: 40px;
             width: 40px;
-            padding: 0;
-            font-size: 18px;
-            font-weight: bold;
-            flex-shrink: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background-color 0.2s ease, height 0.2s ease, width 0.2s ease, font-size 0.2s ease;
+            font-size: 16px;
         }
 
-        .chat-input-area button#send-button.sending {
-            background-color: #ffc107;
-            color: #333;
-        }
-
-        .chat-input-area button#send-button.sending:hover {
-            background-color: #ffa000;
-        }
-
-        body.dark-mode .chat-input-area button#send-button.sending {
-            background-color: #ffd60a;
-            color: #1a1a1a;
-        }
-
-        body.dark-mode .chat-input-area button#send-button.sending:hover {
-            background-color: #ffca28;
-        }
-
-        body.pastel-pink-mode .chat-input-area button#send-button.sending,
-        body.pastel-blue-mode .chat-input-area button#send-button.sending,
-        body.pastel-yellow-mode .chat-input-area button#send-button.sending,
-        body.pastel-purple-mode .chat-input-area button#send-button.sending,
-        body.pastel-rainbow-mode .chat-input-area button#send-button.sending {
-            background-color: #ffee88;
-            color: #554400;
-        }
-
-        body.pastel-pink-mode .chat-input-area button#send-button.sending:hover,
-        body.pastel-blue-mode .chat-input-area button#send-button.sending:hover,
-        body.pastel-yellow-mode .chat-input-area button#send-button.sending:hover,
-        body.pastel-purple-mode .chat-input-area button#send-button.sending:hover,
-        body.pastel-rainbow-mode .chat-input-area button#send-button.sending:hover {
-            background-color: #ffe766;
+        .chat-input-area #send-button.sending {
+            color: #ffc107;
         }
 
         #loading-indicator {
@@ -2493,56 +2405,44 @@
 
         .history-item-actions {
             display: flex;
-            gap: 8px;
             flex-shrink: 0;
             flex-wrap: nowrap;
             cursor: default;
         }
 
-        .history-item-actions button {
+        .icon-button {
             cursor: pointer;
+            background-color: transparent;
+            color: var(--text-secondary);
+            transition: color 0.2s ease;
+            border: none;
+            padding: 4px 6px;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .history-item-actions .js-edit-title-btn {
-            background-color: var(--bg-button-edit);
-            font-size: 16px;
-            padding: 6px 8px;
+        .icon-button:hover {
+            color: var(--color-primary);
         }
 
-        .history-item-actions .js-edit-title-btn:hover {
-            background-color: var(--bg-button-edit-hover);
+        .history-item-actions .icon-button {
+            font-size: 14px;
+            padding: 4px 6px;
         }
 
-        .history-item-actions .js-delete-btn {
-            background-color: var(--bg-button-delete);
+        .message-actions .icon-button {
+            font-size: 11px;
+            padding: 4px 8px;
         }
 
-        .history-item-actions .js-delete-btn:hover {
-            background-color: var(--bg-button-delete-hover);
+        .message-actions .js-delete-btn:hover {
+            color: var(--bg-button-delete-hover);
         }
 
-        .history-item-actions .js-duplicate-btn {
-            background-color: var(--bg-button-duplicate);
-        }
-
-        .history-item-actions .js-duplicate-btn:hover {
-            background-color: var(--bg-button-duplicate-hover);
-        }
-
-        .history-item-actions .js-export-btn {
-            background-color: var(--bg-button-export);
-        }
-
-        .history-item-actions .js-export-btn:hover {
-            background-color: var(--bg-button-export-hover);
-        }
-
-        .history-item-actions .js-link-session-btn,
-        .history-item-actions .js-export-btn,
-        .history-item-actions .js-duplicate-btn,
-        .history-item-actions .js-delete-btn {
-            padding: 6px 8px;
-            font-size: 16px;
+        .message-actions .js-retry-btn:hover {
+            color: var(--bg-button-retry-hover);
         }
 
         .js-history-item-template {
@@ -3580,7 +3480,7 @@
         .history-item-actions .js-link-session-btn {}
 
         .history-item-actions .js-link-session-btn:hover:not(:disabled) {
-            background-color: var(--bg-button-action-hover) !important;
+            opacity: 0.7;
         }
 
         .history-item-actions .js-link-session-btn.linked-a {
@@ -3589,7 +3489,7 @@
         }
 
         .history-item-actions .js-link-session-btn.linked-a:hover:not(:disabled) {
-            background-color: var(--bg-button-save-hover) !important;
+            opacity: 0.7;
         }
 
         .history-item-actions .js-link-session-btn.linked-b {
@@ -3598,7 +3498,7 @@
         }
 
         .history-item-actions .js-link-session-btn.linked-b:hover:not(:disabled) {
-            background-color: var(--bg-button-copy-hover) !important;
+            opacity: 0.7;
         }
 
         #ai-to-ai-chat-btn {}
@@ -3656,7 +3556,7 @@
         }
 
         .app-container.minimized-ui .chat-input-area .footer-action-button,
-        .app-container.minimized-ui .chat-input-area button#send-button {
+        .app-container.minimized-ui .chat-input-area #send-button {
             height: 32px;
             width: 32px;
         }
@@ -3669,8 +3569,8 @@
             font-size: 14px;
         }
 
-        .app-container.minimized-ui .chat-input-area button#send-button {
-            font-size: 16px;
+        .app-container.minimized-ui .chat-input-area #send-button {
+            font-size: 14px;
         }
 
         .mermaid-container {
@@ -4243,7 +4143,7 @@
                 <textarea id="user-input" placeholder="メッセージを入力..." rows="1" aria-label="メッセージ入力"></textarea>
                 <button id="attach-file-btn" title="ファイルを添付" class="footer-action-button">+<span
                         class="attachment-badge"></span></button>
-                <button id="send-button" title="送信"><i data-lucide="send"></i></button>
+                <div id="send-button" class="icon-button" title="送信"><i data-lucide="send"></i></div>
             </footer>
         </div>
 
@@ -4274,12 +4174,11 @@
                                 <span class="updated-date"></span>
                             </div>
                             <div class="history-item-actions">
-                                <button class="js-link-session-btn" title="セッションをリンク/解除"
-                                    style="font-size: 16px; padding: 6px 8px; background-color: var(--bg-button-action);"><i data-lucide="link"></i></button>
-                                <button class="js-edit-title-btn" title="タイトル編集"><i data-lucide="edit"></i></button>
-                                <button class="js-export-btn" title="出力"><i data-lucide="download"></i></button>
-                                <button class="js-duplicate-btn" title="複製"><i data-lucide="copy"></i></button>
-                                <button class="js-delete-btn" title="削除"><i data-lucide="trash-2"></i></button>
+                                <div class="js-link-session-btn icon-button" title="セッションをリンク/解除"><i data-lucide="link"></i></div>
+                                <div class="js-edit-title-btn icon-button" title="タイトル編集"><i data-lucide="edit"></i></div>
+                                <div class="js-export-btn icon-button" title="出力"><i data-lucide="download"></i></div>
+                                <div class="js-duplicate-btn icon-button" title="複製"><i data-lucide="copy"></i></div>
+                                <div class="js-delete-btn icon-button" title="削除"><i data-lucide="trash-2"></i></div>
                             </div>
                         </div>
                     </li>
@@ -8354,11 +8253,12 @@
                 }
 
                 if (role !== 'error' && state.settings.showTopCollapseButton) {
-                    const toggleButtonTop = document.createElement('button');
-                    toggleButtonTop.classList.add('message-toggle-button', 'top');
+                    const toggleButtonTop = document.createElement('div');
+                    toggleButtonTop.classList.add('message-toggle-button', 'top', 'icon-button');
                     toggleButtonTop.dataset.index = index;
                     toggleButtonTop.dataset.action = 'toggle-collapse';
-                    toggleButtonTop.textContent = isCurrentlyCollapsed ? state.settings.toggleButtonTopTextExpand : state.settings.toggleButtonTopTextCollapse;
+                    const iconName = isCurrentlyCollapsed ? 'chevron-down' : 'chevron-up';
+                    toggleButtonTop.innerHTML = `<i data-lucide="${iconName}"></i>`;
                     const topTitle = isCurrentlyCollapsed ? 'メッセージを展開' : 'メッセージを折りたたむ';
                     toggleButtonTop.title = topTitle;
                     toggleButtonTop.setAttribute('aria-label', topTitle);
@@ -8375,7 +8275,7 @@
                     contentDiv.classList.add('collapsed');
                     const toggleButtonTopElement = messageDiv.querySelector('.message-toggle-button.top');
                     if (toggleButtonTopElement) {
-                        toggleButtonTopElement.textContent = state.settings.toggleButtonTopTextExpand;
+                        toggleButtonTopElement.innerHTML = '<i data-lucide="chevron-down"></i>';
                         toggleButtonTopElement.title = 'メッセージを展開';
                         toggleButtonTopElement.setAttribute('aria-label', 'メッセージを展開');
                     }
@@ -8535,11 +8435,12 @@
                     actionsDiv.classList.add('message-actions');
 
                     if (state.settings.showBottomCollapseButton) {
-                        const toggleButtonBottom = document.createElement('button');
-                        toggleButtonBottom.classList.add('message-toggle-button', 'bottom');
+                        const toggleButtonBottom = document.createElement('div');
+                        toggleButtonBottom.classList.add('message-toggle-button', 'bottom', 'icon-button');
                         toggleButtonBottom.dataset.index = index;
                         toggleButtonBottom.dataset.action = 'toggle-collapse';
-                        toggleButtonBottom.textContent = isCurrentlyCollapsed ? state.settings.toggleButtonBottomTextExpand : state.settings.toggleButtonBottomTextCollapse;
+                        const iconName = isCurrentlyCollapsed ? 'chevron-down' : 'chevron-up';
+                        toggleButtonBottom.innerHTML = `<i data-lucide="${iconName}"></i>`;
                         const bottomTitle = isCurrentlyCollapsed ? 'メッセージを展開' : 'メッセージを折りたたむ';
                         toggleButtonBottom.title = bottomTitle;
                         toggleButtonBottom.setAttribute('aria-label', bottomTitle);
@@ -8550,20 +8451,20 @@
                         }
                     }
 
-                    const editButton = document.createElement('button');
-                    editButton.innerHTML = '<i data-lucide="edit"></i>'; editButton.title = 'メッセージを編集'; editButton.classList.add('js-edit-btn');
+                    const editButton = document.createElement('div');
+                    editButton.innerHTML = '<i data-lucide="edit"></i>'; editButton.title = 'メッセージを編集'; editButton.classList.add('js-edit-btn', 'icon-button');
                     editButton.onclick = () => appLogic.startEditMessage(index, messageDiv);
                     actionsDiv.appendChild(editButton);
 
-                    const deleteButton = document.createElement('button');
-                    deleteButton.innerHTML = '<i data-lucide="trash-2"></i>'; deleteButton.title = 'この会話ターンを削除'; deleteButton.classList.add('js-delete-btn');
+                    const deleteButton = document.createElement('div');
+                    deleteButton.innerHTML = '<i data-lucide="trash-2"></i>'; deleteButton.title = 'この会話ターンを削除'; deleteButton.classList.add('js-delete-btn', 'icon-button');
                     deleteButton.onclick = () => appLogic.deleteMessage(index);
                     actionsDiv.appendChild(deleteButton);
 
-                    const copyButton = document.createElement('button');
+                    const copyButton = document.createElement('div');
                     copyButton.innerHTML = '<i data-lucide="copy"></i>';
                     copyButton.title = 'テキストをコピー';
-                    copyButton.classList.add('js-copy-btn');
+                    copyButton.classList.add('js-copy-btn', 'icon-button');
                     copyButton.onclick = (event) => {
                         event.stopPropagation();
                         appLogic.copyMessageText(index, copyButton);
@@ -8571,10 +8472,10 @@
                     actionsDiv.appendChild(copyButton);
 
                     if (role === 'user' || role === 'model') {
-                        const retryButton = document.createElement('button');
+                        const retryButton = document.createElement('div');
                         retryButton.innerHTML = '<i data-lucide="refresh-cw"></i>';
                         retryButton.title = 'このメッセージから再生成';
-                        retryButton.classList.add('js-retry-btn');
+                        retryButton.classList.add('js-retry-btn', 'icon-button');
                         retryButton.onclick = () => {
                             const userIndexForRetry = (role === 'model' && index > 0) ? appLogic.findPreviousUserIndex(index) : index;
                             if (userIndexForRetry !== -1) appLogic.retryFromMessage(userIndexForRetry);
@@ -9229,7 +9130,7 @@
                             li.querySelector('.updated-date').textContent = `更新: ${this.formatDate(chat.updatedAt)}`;
 
                             li.onclick = (event) => {
-                                if (!event.target.closest('.history-item-actions button')) {
+                                if (!event.target.closest('.history-item-actions .icon-button')) {
                                     appLogic.loadChat(chat.id);
                                     this.showScreen('chat');
                                 }
@@ -11707,7 +11608,7 @@
 
                 elements.messageContainer.addEventListener('click', (event) => {
                     const clickedMessage = event.target.closest('.message');
-                    if (event.target.closest('.message-actions button, .message-cascade-controls button, .message-toggle-button, .interactive-title-content, .code-copy-button, a[href="#"], .thought-summary-details summary, .attachment-actions button, .add-more-attachments-btn')) {
+                    if (event.target.closest('.message-actions .icon-button, .message-cascade-controls button, .message-toggle-button, .interactive-title-content, .code-copy-button, a[href="#"], .thought-summary-details summary, .attachment-actions button, .add-more-attachments-btn')) {
                         return;
                     }
                     if (clickedMessage) {
@@ -16104,18 +16005,14 @@
                     }
 
                     toggleButtons.forEach(button => {
-                        let textCollapse, textExpand, baseTitle;
-                        if (button.classList.contains('top')) {
-                            textCollapse = state.settings.toggleButtonTopTextCollapse;
-                            textExpand = state.settings.toggleButtonTopTextExpand;
-                        } else {
-                            textCollapse = state.settings.toggleButtonBottomTextCollapse;
-                            textExpand = state.settings.toggleButtonBottomTextExpand;
-                        }
-                        baseTitle = isCollapsed ? 'メッセージを展開' : 'メッセージを折りたたむ';
-                        button.textContent = isCollapsed ? textExpand : textCollapse;
+                        const iconName = isCollapsed ? 'chevron-down' : 'chevron-up';
+                        button.innerHTML = `<i data-lucide="${iconName}"></i>`;
+                        const baseTitle = isCollapsed ? 'メッセージを展開' : 'メッセージを折りたたむ';
                         button.title = baseTitle;
                         button.setAttribute('aria-label', baseTitle);
+                        if (typeof window.initLucideIcons === 'function') {
+                            window.initLucideIcons(button);
+                        }
                     });
                 }
             },
@@ -16136,15 +16033,12 @@
 
                     if (toggleButtons) {
                         toggleButtons.forEach(button => {
-                            let textCollapse;
-                            if (button.classList.contains('top')) {
-                                textCollapse = state.settings.toggleButtonTopTextCollapse;
-                            } else {
-                                textCollapse = state.settings.toggleButtonBottomTextCollapse;
-                            }
-                            button.textContent = textCollapse;
+                            button.innerHTML = '<i data-lucide="chevron-up"></i>';
                             button.title = 'メッセージを折りたたむ';
                             button.setAttribute('aria-label', 'メッセージを折りたたむ');
+                            if (typeof window.initLucideIcons === 'function') {
+                                window.initLucideIcons(button);
+                            }
                         });
                     }
                 }
