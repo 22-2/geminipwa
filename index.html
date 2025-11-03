@@ -1752,7 +1752,7 @@
             overflow: hidden;
         }
 
-        .message.message-hidden-by-toggle .message-actions,
+        .message.message-hidden-by-toggle .message-actions-trigger,
         .message.message-hidden-by-toggle .message-cascade-controls,
         .message.message-hidden-by-toggle .message-toggle-button,
         .message.message-hidden-by-toggle .message-icon,
@@ -1951,30 +1951,97 @@
             line-height: 1.5;
         }
 
-        .message-actions {
-            position: absolute;
-            bottom: -40px;
+        /* Message Actions Popover */
+        .message-actions-popover {
+            position: fixed;
+            inset: unset;
+            margin: 0;
+            padding: 8px 0;
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            background-color: var(--bg-primary);
+            box-shadow: 0 4px 12px var(--shadow-secondary);
+            min-width: 200px;
+            max-width: 250px;
+        }
+
+        .message-actions-popover:popover-open {
+            /* 位置はJavaScriptで動的に設定 */
+        }
+
+        .message-actions-popover .menu-item {
+            width: 100%;
             display: flex;
-            flex-wrap: nowrap;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            border: none;
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 14px;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .message-actions-popover .menu-item:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        .message-actions-popover .menu-item i {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .message-actions-popover .menu-item span {
+            flex: 1;
+        }
+
+        .message-actions-popover .menu-divider {
+            margin: 4px 0;
+            border: none;
+            border-top: 1px solid var(--border-tertiary);
+        }
+
+        .message-actions-popover .token-count-display {
+            padding: 10px 16px;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-align: center;
+            border-top: 1px solid var(--border-tertiary);
+        }
+
+        .message-actions-trigger {
+            position: absolute;
+            bottom: -35px;
             background-color: rgba(var(--message-actions-base-rgb), var(--message-actions-bg-opacity));
-            padding: 1px 1px 1px 1px;
+            border: 1px solid var(--border-secondary);
             border-radius: 5px;
-            box-shadow: 0 1px 3px var(--shadow-primary);
-            z-index: 2;
+            padding: 4px 8px;
+            cursor: pointer;
             opacity: 0;
-            transition: opacity 0.2s ease, background-color 0.3s ease;
+            transition: opacity 0.2s ease;
+            z-index: 2;
+            color: var(--text-secondary);
         }
 
-        .message.user .message-actions {
+        .message-actions-trigger:hover {
+            color: var(--text-primary);
+            background-color: rgba(var(--message-actions-base-rgb), 1);
+        }
+
+        .message-actions-trigger i {
+            width: 16px;
+            height: 16px;
+        }
+
+        .message.user .message-actions-trigger {
             right: 0;
-            left: auto;
-            justify-content: flex-end;
         }
 
-        .message.model .message-actions {
+        .message.model .message-actions-trigger {
             left: 0;
-            right: auto;
-            justify-content: flex-start;
         }
 
 
@@ -2045,7 +2112,7 @@
             pointer-events: none;
         }
 
-        .message.editing .message-actions,
+        .message.editing .message-actions-trigger,
         .message.editing .message-cascade-controls,
         .message.editing .message-toggle-button {
             opacity: 0;
@@ -2437,16 +2504,11 @@
             padding: 4px 6px;
         }
 
-        .message-actions .icon-button {
-            font-size: 11px;
-            padding: 4px 8px;
-        }
-
-        .message-actions .js-delete-btn:hover {
+        .message-actions-popover .menu-item.delete-item:hover {
             color: var(--bg-button-delete-hover);
         }
 
-        .message-actions .js-retry-btn:hover {
+        .message-actions-popover .menu-item.retry-item:hover {
             color: var(--bg-button-retry-hover);
         }
 
@@ -2835,8 +2897,8 @@
             transform: scale(1.01);
         }
 
-        .message-actions:hover,
-        .message:has(.message-actions):hover .message-actions {
+        .message-actions-trigger:hover,
+        .message:hover .message-actions-trigger {
             opacity: 1;
             pointer-events: auto;
         }
@@ -2856,7 +2918,7 @@
             opacity: 1;
         }
 
-        .message.editing.show-actions .message-actions,
+        .message.editing.show-actions .message-actions-trigger,
         .message.editing.show-actions .message-cascade-controls,
         .message.editing.show-actions .message-toggle-button {
             display: none !important;
@@ -2938,13 +3000,7 @@
             background-color: var(--bg-secondary);
         }
 
-        .message-actions .token-count-display {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            vertical-align: middle;
-            line-height: 1.5;
-            white-space: nowrap;
-        }
+
 
         .custom-dialog {
             border: 1px solid var(--border-secondary);
@@ -8557,64 +8613,84 @@
                 }
 
                 if (role !== 'error') {
-                    const actionsDiv = document.createElement('div');
-                    actionsDiv.classList.add('message-actions');
+                    // Popover menu
+                    const popoverId = `message-actions-popover-${index}`;
+                    const actionsPopover = document.createElement('div');
+                    actionsPopover.id = popoverId;
+                    actionsPopover.setAttribute('popover', 'auto');
+                    actionsPopover.classList.add('message-actions-popover');
+
+                    // Popover trigger button
+                    const actionsTrigger = document.createElement('div');
+                    actionsTrigger.classList.add('message-actions-trigger', 'icon-button');
+                    actionsTrigger.innerHTML = '<i data-lucide="more-horizontal"></i>';
+                    actionsTrigger.title = 'メッセージアクション';
+                    actionsTrigger.setAttribute('aria-label', 'メッセージアクション');
+                    actionsTrigger.onclick = () => {
+                        actionsPopover.showPopover();
+                    };
+                    messageDiv.appendChild(actionsTrigger);
 
                     if (state.settings.showBottomCollapseButton) {
-                        const toggleButtonBottom = document.createElement('div');
-                        toggleButtonBottom.classList.add('message-toggle-button', 'bottom', 'icon-button');
-                        toggleButtonBottom.dataset.index = index;
-                        toggleButtonBottom.dataset.action = 'toggle-collapse';
+                        const toggleButton = document.createElement('button');
+                        toggleButton.classList.add('menu-item');
                         const iconName = isCurrentlyCollapsed ? 'chevron-down' : 'chevron-up';
-                        toggleButtonBottom.innerHTML = `<i data-lucide="${iconName}"></i>`;
-                        const bottomTitle = isCurrentlyCollapsed ? 'メッセージを展開' : 'メッセージを折りたたむ';
-                        toggleButtonBottom.title = bottomTitle;
-                        toggleButtonBottom.setAttribute('aria-label', bottomTitle);
-                        if (actionsDiv.firstChild) {
-                            actionsDiv.insertBefore(toggleButtonBottom, actionsDiv.firstChild);
-                        } else {
-                            actionsDiv.appendChild(toggleButtonBottom);
-                        }
+                        const buttonText = isCurrentlyCollapsed ? 'メッセージを展開' : 'メッセージを折りたたむ';
+                        toggleButton.innerHTML = `<i data-lucide="${iconName}"></i><span>${buttonText}</span>`;
+                        toggleButton.onclick = () => {
+                            actionsPopover.hidePopover();
+                            const toggleBtn = messageDiv.querySelector('.message-toggle-button.top');
+                            if (toggleBtn) toggleBtn.click();
+                        };
+                        actionsPopover.appendChild(toggleButton);
                     }
 
-                    const editButton = document.createElement('div');
-                    editButton.innerHTML = '<i data-lucide="edit"></i>'; editButton.title = 'メッセージを編集'; editButton.classList.add('js-edit-btn', 'icon-button');
-                    editButton.onclick = () => appLogic.startEditMessage(index, messageDiv);
-                    actionsDiv.appendChild(editButton);
+                    const editButton = document.createElement('button');
+                    editButton.classList.add('menu-item');
+                    editButton.innerHTML = '<i data-lucide="edit"></i><span>メッセージを編集</span>';
+                    editButton.onclick = () => {
+                        actionsPopover.hidePopover();
+                        appLogic.startEditMessage(index, messageDiv);
+                    };
+                    actionsPopover.appendChild(editButton);
 
-                    const copyButton = document.createElement('div');
-                    copyButton.innerHTML = '<i data-lucide="copy"></i>';
-                    copyButton.title = 'テキストをコピー';
-                    copyButton.classList.add('js-copy-btn', 'icon-button');
+                    const copyButton = document.createElement('button');
+                    copyButton.classList.add('menu-item');
+                    copyButton.innerHTML = '<i data-lucide="copy"></i><span>テキストをコピー</span>';
                     copyButton.onclick = (event) => {
                         event.stopPropagation();
+                        actionsPopover.hidePopover();
                         appLogic.copyMessageText(index, copyButton);
                     };
-                    actionsDiv.appendChild(copyButton);
+                    actionsPopover.appendChild(copyButton);
 
-                    const deleteButton = document.createElement('div');
-                    deleteButton.innerHTML = '<i data-lucide="trash-2"></i>'; deleteButton.title = 'この会話ターンを削除'; deleteButton.classList.add('js-delete-btn', 'icon-button');
-                    deleteButton.onclick = () => appLogic.deleteMessage(index);
-                    actionsDiv.appendChild(deleteButton);
+                    const deleteButton = document.createElement('button');
+                    deleteButton.classList.add('menu-item', 'delete-item');
+                    deleteButton.innerHTML = '<i data-lucide="trash-2"></i><span>この会話ターンを削除</span>';
+                    deleteButton.onclick = () => {
+                        actionsPopover.hidePopover();
+                        appLogic.deleteMessage(index);
+                    };
+                    actionsPopover.appendChild(deleteButton);
 
                     if (role === 'user' || role === 'model') {
-                        const retryButton = document.createElement('div');
-                        retryButton.innerHTML = '<i data-lucide="refresh-cw"></i>';
-                        retryButton.title = 'このメッセージから再生成';
-                        retryButton.classList.add('js-retry-btn', 'icon-button');
+                        const retryButton = document.createElement('button');
+                        retryButton.classList.add('menu-item', 'retry-item');
+                        retryButton.innerHTML = '<i data-lucide="refresh-cw"></i><span>このメッセージから再生成</span>';
                         retryButton.onclick = () => {
+                            actionsPopover.hidePopover();
                             const userIndexForRetry = (role === 'model' && index > 0) ? appLogic.findPreviousUserIndex(index) : index;
                             if (userIndexForRetry !== -1) appLogic.retryFromMessage(userIndexForRetry);
                         };
-                        actionsDiv.appendChild(retryButton);
+                        actionsPopover.appendChild(retryButton);
                     }
 
                     if (role === 'model' && messageData?.usageMetadata &&
                         typeof messageData.usageMetadata.candidatesTokenCount === 'number' &&
                         typeof messageData.usageMetadata.totalTokenCount === 'number') {
                         const usage = messageData.usageMetadata;
-                        const tokenSpan = document.createElement('span');
-                        tokenSpan.classList.add('token-count-display');
+                        const tokenDiv = document.createElement('div');
+                        tokenDiv.classList.add('token-count-display');
 
                         let finalTotalTokenCount = usage.totalTokenCount;
                         if (typeof messageData.usageMetadata.thoughtsTokenCount === 'number' && messageApiProvider === 'gemini') {
@@ -8624,11 +8700,42 @@
                         const formattedCandidates = usage.candidatesTokenCount.toLocaleString('en-US');
                         const formattedTotal = finalTotalTokenCount.toLocaleString('en-US');
 
-                        tokenSpan.textContent = `${formattedCandidates} / ${formattedTotal}`;
-                        tokenSpan.title = `Candidate Tokens / Total Tokens`;
-                        actionsDiv.appendChild(tokenSpan);
+                        tokenDiv.textContent = `Tokens: ${formattedCandidates} / ${formattedTotal}`;
+                        tokenDiv.title = `Candidate Tokens / Total Tokens`;
+                        actionsPopover.appendChild(tokenDiv);
                     }
-                    messageDiv.appendChild(actionsDiv);
+                    messageDiv.appendChild(actionsPopover);
+
+                    // Popoverの位置を調整するイベントリスナー
+                    actionsPopover.addEventListener('toggle', (event) => {
+                        if (event.newState === 'open') {
+                            const triggerRect = actionsTrigger.getBoundingClientRect();
+                            const popoverRect = actionsPopover.getBoundingClientRect();
+                            const viewportWidth = window.innerWidth;
+                            const viewportHeight = window.innerHeight;
+
+                            let top = triggerRect.bottom + 5;
+                            let left = triggerRect.left;
+
+                            // 右端がはみ出る場合は左に調整
+                            if (left + popoverRect.width > viewportWidth) {
+                                left = triggerRect.right - popoverRect.width;
+                            }
+
+                            // 下端がはみ出る場合は上に表示
+                            if (top + popoverRect.height > viewportHeight) {
+                                top = triggerRect.top - popoverRect.height - 5;
+                            }
+
+                            actionsPopover.style.top = `${top}px`;
+                            actionsPopover.style.left = `${left}px`;
+
+                            // アイコンを初期化
+                            if (typeof window.initLucideIcons === 'function') {
+                                window.initLucideIcons(actionsPopover);
+                            }
+                        }
+                    });
                 }
 
                 if (isStreamingPlaceholder) {
@@ -11765,7 +11872,7 @@
 
                 elements.messageContainer.addEventListener('click', (event) => {
                     const clickedMessage = event.target.closest('.message');
-                    if (event.target.closest('.message-actions .icon-button, .message-cascade-controls button, .message-toggle-button, .interactive-title-content, .code-copy-button, a[href="#"], .thought-summary-details summary, .attachment-actions button, .add-more-attachments-btn')) {
+                    if (event.target.closest('.message-actions-trigger, .message-actions-popover, .message-cascade-controls button, .message-toggle-button, .interactive-title-content, .code-copy-button, a[href="#"], .thought-summary-details summary, .attachment-actions button, .add-more-attachments-btn')) {
                         return;
                     }
                     if (clickedMessage) {
@@ -16175,7 +16282,8 @@
                     // メッセージを展開したときにメッセージの一番下にスクロール
                     if (!isCollapsed) {
                         setTimeout(() => {
-                            messageElement.querySelector(".message-actions").scrollIntoView({ block: 'end' });
+                            const trigger = messageElement.querySelector(".message-actions-trigger");
+                            if (trigger) trigger.scrollIntoView({ block: 'end' });
                         }, 100);
                     }
                 }
@@ -18734,7 +18842,8 @@
                         Settings: lucide.Settings,
                         ArrowLeft: lucide.ArrowLeft,
                         MoreVertical: lucide.MoreVertical,
-                        Zap: lucide.Zap
+                        Zap: lucide.Zap,
+                        MoreHorizontal: lucide.MoreHorizontal,
                     },
                     nameAttr: 'data-lucide',
                     attrs: {
