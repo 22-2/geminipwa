@@ -8576,11 +8576,6 @@
                     editButton.onclick = () => appLogic.startEditMessage(index, messageDiv);
                     actionsDiv.appendChild(editButton);
 
-                    const deleteButton = document.createElement('div');
-                    deleteButton.innerHTML = '<i data-lucide="trash-2"></i>'; deleteButton.title = 'この会話ターンを削除'; deleteButton.classList.add('js-delete-btn', 'icon-button');
-                    deleteButton.onclick = () => appLogic.deleteMessage(index);
-                    actionsDiv.appendChild(deleteButton);
-
                     const copyButton = document.createElement('div');
                     copyButton.innerHTML = '<i data-lucide="copy"></i>';
                     copyButton.title = 'テキストをコピー';
@@ -8590,6 +8585,11 @@
                         appLogic.copyMessageText(index, copyButton);
                     };
                     actionsDiv.appendChild(copyButton);
+
+                    const deleteButton = document.createElement('div');
+                    deleteButton.innerHTML = '<i data-lucide="trash-2"></i>'; deleteButton.title = 'この会話ターンを削除'; deleteButton.classList.add('js-delete-btn', 'icon-button');
+                    deleteButton.onclick = () => appLogic.deleteMessage(index);
+                    actionsDiv.appendChild(deleteButton);
 
                     if (role === 'user' || role === 'model') {
                         const retryButton = document.createElement('div');
