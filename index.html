@@ -2407,6 +2407,12 @@
             flex-shrink: 0;
             flex-wrap: nowrap;
             cursor: default;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .history-item:hover .history-item-actions {
+            opacity: 1;
         }
 
         .icon-button {
@@ -16166,7 +16172,7 @@
                         }
                     });
 
-                    // メッセージを展開したときに一番下にスクロール
+                    // メッセージを展開したときにメッセージの一番下にスクロール
                     if (!isCollapsed) {
                         setTimeout(() => {
                             messageElement.querySelector(".message-actions").scrollIntoView({ block: 'end' });
