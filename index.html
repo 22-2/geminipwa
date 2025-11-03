@@ -4025,6 +4025,7 @@
             box-shadow: 0 4px 12px var(--shadow-secondary);
             min-width: 220px;
             max-width: 280px;
+            overflow: hidden;
         }
 
         .header-menu-popover:popover-open {
@@ -4094,6 +4095,15 @@
         }
 
         .header-menu-popover .menu-item.hidden {
+            display: none;
+        }
+
+        .header-menu-popover .menu-item.hidden + .menu-divider,
+        .header-menu-popover .menu-divider:has(+ .menu-item.hidden) {
+            display: none;
+        }
+
+        .header-menu-popover .menu-divider + .menu-divider {
             display: none;
         }
     </style>
