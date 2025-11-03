@@ -2195,11 +2195,11 @@
             color: #424242;
         }
 
-        .chat-input-area button#attach-file-btn {
+        .chat-input-area #attach-file-btn {
             position: relative;
         }
 
-        .chat-input-area button#paste-to-input-btn {
+        .chat-input-area #paste-to-input-btn {
             font-size: 16px;
         }
 
@@ -2345,7 +2345,7 @@
             pointer-events: none;
         }
 
-        .chat-input-area button#attach-file-btn.has-attachments .attachment-badge {
+        .chat-input-area #attach-file-btn.has-attachments .attachment-badge {
             display: block;
         }
 
@@ -3626,7 +3626,7 @@
             font-size: 16px;
         }
 
-        .app-container.minimized-ui .chat-input-area button#paste-to-input-btn {
+        .app-container.minimized-ui .chat-input-area #paste-to-input-btn {
             font-size: 14px;
         }
 
@@ -4314,17 +4314,17 @@
                 <div id="loading-indicator" class="loading-indicator hidden" aria-live="polite">応答中</div>
             </main>
             <footer class="chat-input-area">
-                <button id="footer-api-provider-toggle-btn" class="footer-action-button api-provider-toggle-btn"
-                    title="APIプロバイダー切替"></button>
-                <button id="roll-dice-btn" title="ランダム数値を入力" class="footer-action-button hidden">🎲</button>
-                <button id="ai-to-ai-chat-btn" title="AI間会話ステップ実行" class="footer-action-button hidden">👥</button>
-                <button id="footer-twin-engine-mode-toggle-btn" title="Twin-engineモード切替"
-                    class="footer-action-button hidden">🛞</button>
-                <button id="footer-resummarize-btn" title="現在のチャット履歴を要約" class="footer-action-button hidden">♻️</button>
-                <button id="paste-to-input-btn" title="入力欄に貼り付け" class="footer-action-button">貼</button>
+                <div id="footer-api-provider-toggle-btn" class="footer-action-button icon-button api-provider-toggle-btn"
+                    title="APIプロバイダー切替"></div>
+                <div id="roll-dice-btn" title="ランダム数値を入力" class="footer-action-button icon-button hidden"><i data-lucide="dice-6"></i></div>
+                <div id="ai-to-ai-chat-btn" title="AI間会話ステップ実行" class="footer-action-button icon-button hidden"><i data-lucide="users"></i></div>
+                <div id="footer-twin-engine-mode-toggle-btn" title="Twin-engineモード切替"
+                    class="footer-action-button icon-button hidden"><i data-lucide="settings"></i></div>
+                <div id="footer-resummarize-btn" title="現在のチャット履歴を要約" class="footer-action-button icon-button hidden"><i data-lucide="refresh-cw"></i></div>
+                <div id="paste-to-input-btn" title="入力欄に貼り付け" class="footer-action-button icon-button"><i data-lucide="clipboard"></i></div>
                 <textarea id="user-input" placeholder="メッセージを入力..." rows="1" aria-label="メッセージ入力"></textarea>
-                <button id="attach-file-btn" title="ファイルを添付" class="footer-action-button">+<span
-                        class="attachment-badge"></span></button>
+                <div id="attach-file-btn" title="ファイルを添付" class="footer-action-button icon-button"><i data-lucide="paperclip"></i><span
+                        class="attachment-badge"></span></div>
                 <div id="send-button" class="icon-button" title="送信"><i data-lucide="send"></i></div>
             </footer>
         </div>
@@ -8631,9 +8631,10 @@
                     };
                     messageDiv.appendChild(actionsTrigger);
 
+                    let toggleButton = null;
                     if (state.settings.showBottomCollapseButton) {
-                        const toggleButton = document.createElement('button');
-                        toggleButton.classList.add('menu-item');
+                        toggleButton = document.createElement('button');
+                        toggleButton.classList.add('menu-item', 'toggle-collapse-item');
                         const iconName = isCurrentlyCollapsed ? 'chevron-down' : 'chevron-up';
                         const buttonText = isCurrentlyCollapsed ? 'メッセージを展開' : 'メッセージを折りたたむ';
                         toggleButton.innerHTML = `<i data-lucide="${iconName}"></i><span>${buttonText}</span>`;
@@ -8709,6 +8710,14 @@
                     // Popoverの位置を調整するイベントリスナー
                     actionsPopover.addEventListener('toggle', (event) => {
                         if (event.newState === 'open') {
+                            // 折りたたみボタンの状態を更新
+                            if (toggleButton) {
+                                const isCollapsed = messageDiv.classList.contains("message-content-collapsed-fully");
+                                const iconName = isCollapsed ? 'chevron-down' : 'chevron-up';
+                                const buttonText = isCollapsed ? 'メッセージを展開' : 'メッセージを折りたたむ';
+                                toggleButton.innerHTML = `<i data-lucide="${iconName}"></i><span>${buttonText}</span>`;
+                            }
+
                             const triggerRect = actionsTrigger.getBoundingClientRect();
                             const popoverRect = actionsPopover.getBoundingClientRect();
                             const viewportWidth = window.innerWidth;
@@ -10213,26 +10222,29 @@
             },
             updateProviderToggleButtons() {
                 const providerMap = {
-                    gemini: { text: 'GE', title: 'Gemini', className: 'gemini' },
-                    deepseek: { text: 'DS', title: 'DeepSeek', className: 'deepseek' },
-                    claude: { text: 'AN', title: 'Anthropic', className: 'claude' },
-                    openai: { text: 'OP', title: 'OpenAI', className: 'openai' },
-                    xai: { text: 'XA', title: 'xAI', className: 'xai' },
-                    llmaggregator: { text: 'LA', title: 'LLM Aggregator', className: 'llmaggregator' },
-                    dummy: { text: 'DU', title: 'Dummy AI', className: 'dummy' },
+                    gemini: { text: 'GE', title: 'Gemini', className: 'gemini', icon: 'sparkles' },
+                    deepseek: { text: 'DS', title: 'DeepSeek', className: 'deepseek', icon: 'brain' },
+                    claude: { text: 'AN', title: 'Anthropic', className: 'claude', icon: 'message-square' },
+                    openai: { text: 'OP', title: 'OpenAI', className: 'openai', icon: 'zap' },
+                    xai: { text: 'XA', title: 'xAI', className: 'xai', icon: 'cpu' },
+                    llmaggregator: { text: 'LA', title: 'LLM Aggregator', className: 'llmaggregator', icon: 'layers' },
+                    dummy: { text: 'DU', title: 'Dummy AI', className: 'dummy', icon: 'bot' },
                 };
-                const currentProviderInfo = providerMap[state.settings.apiProvider] || { text: '??', title: 'Unknown', className: '' };
+                const currentProviderInfo = providerMap[state.settings.apiProvider] || { text: '??', title: 'Unknown', className: '', icon: 'help-circle' };
 
                 // 有効なプロバイダーの数をカウント
                 const enabledProvidersCount = Object.values(state.settings.apiProviderCycle).filter(enabled => enabled === true).length;
 
                 [elements.headerApiProviderToggleBtn, elements.footerApiProviderToggleBtn].forEach(button => {
                     if (button) {
-                        button.textContent = currentProviderInfo.text;
+                        button.innerHTML = `<i data-lucide="${currentProviderInfo.icon}"></i>`;
                         button.title = `API: ${currentProviderInfo.title}`;
                         button.classList.remove('gemini', 'deepseek', 'claude', 'openai', 'xai', 'llmaggregator', 'dummy');
                         if (currentProviderInfo.className) {
                             button.classList.add(currentProviderInfo.className);
+                        }
+                        if (typeof window.initLucideIcons === 'function') {
+                            window.initLucideIcons(button);
                         }
 
                         // プロバイダーが1つだけの場合は非表示
@@ -10579,7 +10591,7 @@
             setSendingState(sending) {
                 state.isSending = sending;
                 if (sending) {
-                    elements.sendButton.textContent = '止';
+                    elements.sendButton.innerHTML = '<i data-lucide="square"></i>';
                     elements.sendButton.classList.add('sending');
                     elements.sendButton.title = "停止";
                     elements.sendButton.disabled = false;
@@ -10588,8 +10600,11 @@
                     elements.pasteToInputBtn.disabled = true;
                     elements.rollDiceBtn.disabled = true;
                     if (elements.aiToAiChatBtn) elements.aiToAiChatBtn.disabled = true;
+                    if (typeof window.initLucideIcons === 'function') {
+                        window.initLucideIcons(elements.sendButton);
+                    }
                 } else {
-                    elements.sendButton.textContent = '送';
+                    elements.sendButton.innerHTML = '<i data-lucide="send"></i>';
                     elements.sendButton.classList.remove('sending');
                     elements.sendButton.title = "送信";
                     elements.userInput.disabled = false;
@@ -10601,6 +10616,9 @@
                             state.linkedSessionIds.length === 2 &&
                             state.currentChatId && state.linkedSessionIds.includes(state.currentChatId);
                         elements.aiToAiChatBtn.disabled = !showAiToAiBtn;
+                    }
+                    if (typeof window.initLucideIcons === 'function') {
+                        window.initLucideIcons(elements.sendButton);
                     }
                     this.adjustTextareaHeight();
                 }
@@ -18844,6 +18862,17 @@
                         MoreVertical: lucide.MoreVertical,
                         Zap: lucide.Zap,
                         MoreHorizontal: lucide.MoreHorizontal,
+                        Square: lucide.Square,
+                        Dice6: lucide.Dice6,
+                        Users: lucide.Users,
+                        Paperclip: lucide.Paperclip,
+                        Sparkles: lucide.Sparkles,
+                        Brain: lucide.Brain,
+                        MessageSquare: lucide.MessageSquare,
+                        Cpu: lucide.Cpu,
+                        Layers: lucide.Layers,
+                        Bot: lucide.Bot,
+                        HelpCircle: lucide.HelpCircle,
                     },
                     nameAttr: 'data-lucide',
                     attrs: {
