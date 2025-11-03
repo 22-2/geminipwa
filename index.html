@@ -4015,7 +4015,7 @@
 
         /* Header Menu Popover */
         .header-menu-popover {
-            position: fixed;
+            position: absolute;
             inset: unset;
             margin: 0;
             padding: 8px 0;
@@ -4029,8 +4029,8 @@
         }
 
         .header-menu-popover:popover-open {
-            top: 50px;
-            right: 10px;
+            top: anchor(bottom);
+            right: anchor(right);
         }
 
         .app-header {
@@ -18834,12 +18834,35 @@
                 });
 
                 headerMenuPopover.addEventListener('mouseleave', function() {
+                    // popoverが開いている場合は閉じない
+                    if (headerMenuPopover.matches(':popover-open')) {
+                        return;
+                    }
                     clearTimeout(hideTimeout);
                     hideTimeout = setTimeout(() => {
                         appHeader.classList.remove('visible');
                     }, 100);
                 });
+
+                // popoverが閉じられた時の処理
+                headerMenuPopover.addEventListener('toggle', function(e) {
+                    if (e.newState === 'closed') {
+                        // popoverが閉じられた後、マウスがヘッダーエリア外にある場合のみヘッダーを閉じる
+                        setTimeout(() => {
+                            const rect = appHeader.getBoundingClientRect();
+                            const mouseY = window.lastMouseY || 0;
+                            if (mouseY > rect.bottom) {
+                                appHeader.classList.remove('visible');
+                            }
+                        }, 100);
+                    }
+                });
             }
+
+            // マウス位置を追跡
+            document.addEventListener('mousemove', function(e) {
+                window.lastMouseY = e.clientY;
+            });
         })();
 
         // Lucide アイコンの初期化（使用するアイコンのみ）
