@@ -1232,16 +1232,12 @@
             flex-shrink: 0;
         }
 
-        .app-header #delete-session-btn {
-            background-color: var(--bg-button-header-delete);
+        .app-header :is(#delete-session-btn, #clear-chat-btn) {
+            color: var(--color-danger);
         }
 
         .app-header #delete-session-btn:hover:not(:disabled) {
             opacity: 0.7;
-        }
-
-        .app-header #copy-session-btn {
-            background-color: var(--bg-button-header-copy);
         }
 
         .app-header #copy-session-btn:hover:not(:disabled) {
@@ -4226,13 +4222,17 @@
                         <span>設定</span>
                     </button>
                     <hr class="menu-divider">
+                    <button id="copy-session-btn" class="menu-item" title="チャットセッション全体のコピーを作成">
+                        <i data-lucide="copy"></i>
+                        <span>チャットのコピーを作成</span>
+                    </button>
+                    <button id="clear-chat-btn" class="menu-item" title="チャットをクリアして新規開始">
+                        <i data-lucide="eraser"></i>
+                        <span>チャットをクリア</span>
+                    </button>
                     <button id="delete-session-btn" class="menu-item" title="現在のチャットを削除">
                         <i data-lucide="trash-2"></i>
                         <span>チャットを削除</span>
-                    </button>
-                    <button id="copy-session-btn" class="menu-item" title="チャット全体をコピー">
-                        <i data-lucide="copy"></i>
-                        <span>チャットをコピー</span>
                     </button>
                     <hr class="menu-divider">
                     <button id="header-api-provider-toggle-btn" class="menu-item api-provider-toggle-btn" title="APIプロバイダー切替">
@@ -5918,12 +5918,16 @@
                                                 「新規」ボタンを表示する（「新」ボタン）
                                             </label>
                                             <label class="checkbox-label">
-                                                <input type="checkbox" id="show-delete-session-button-toggle">
-                                                「全削除」ボタンを表示する（「削」ボタン）
-                                            </label>
-                                            <label class="checkbox-label">
                                                 <input type="checkbox" id="show-copy-session-button-toggle">
                                                 「全コピー」ボタンを表示する（「コ」ボタン）
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="show-clear-chat-button-toggle">
+                                                「チャットをクリア」ボタンを表示する
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="show-delete-session-button-toggle">
+                                                「全削除」ボタンを表示する（「削」ボタン）
                                             </label>
                                             <hr style="margin: 10px 0; border-top: 1px solid var(--border-tertiary);">
                                             <label class="checkbox-label">
@@ -6791,6 +6795,7 @@
             showNewChatButtonToggle: document.getElementById('show-new-chat-button-toggle'),
             showDeleteSessionButtonToggle: document.getElementById('show-delete-session-button-toggle'),
             showCopySessionButtonToggle: document.getElementById('show-copy-session-button-toggle'),
+            showClearChatButtonToggle: document.getElementById('show-clear-chat-button-toggle'),
             showScrollToTopButtonToggle: document.getElementById('show-scroll-to-top-button-toggle'),
             showScrollToBottomButtonToggle: document.getElementById('show-scroll-to-bottom-button-toggle'),
             showToggleAllContentButtonToggle: document.getElementById('show-toggle-all-content-button-toggle'),
@@ -6817,6 +6822,7 @@
             newChatBtn: document.getElementById('new-chat-btn'),
             deleteSessionBtn: document.getElementById('delete-session-btn'),
             copySessionBtn: document.getElementById('copy-session-btn'),
+            clearChatBtn: document.getElementById('clear-chat-btn'),
             scrollToTopBtn: document.getElementById('scroll-to-top-btn'),
             scrollToBottomBtn: document.getElementById('scroll-to-bottom-btn'),
             toggleAllContentBtn: document.getElementById('toggle-all-content-btn'),
@@ -7163,6 +7169,7 @@
                 showNewChatButton: true,
                 showDeleteSessionButton: false,
                 showCopySessionButton: false,
+                showClearChatButton: true,
                 showScrollToTopButton: true,
                 showScrollToBottomButton: true,
                 showToggleAllContentButton: false,
@@ -9936,6 +9943,7 @@
                 elements.showNewChatButtonToggle.checked = state.settings.showNewChatButton;
                 elements.showDeleteSessionButtonToggle.checked = state.settings.showDeleteSessionButton;
                 elements.showCopySessionButtonToggle.checked = state.settings.showCopySessionButton;
+                elements.showClearChatButtonToggle.checked = state.settings.showClearChatButton;
                 elements.showScrollToTopButtonToggle.checked = state.settings.showScrollToTopButton;
                 elements.showScrollToBottomButtonToggle.checked = state.settings.showScrollToBottomButton;
                 elements.showToggleAllContentButtonToggle.checked = state.settings.showToggleAllContentButton;
@@ -10133,6 +10141,7 @@
                         { id: '#show-new-chat-button-toggle', element: elements.newChatBtn },
                         { id: '#show-delete-session-button-toggle', element: elements.deleteSessionBtn },
                         { id: '#show-copy-session-button-toggle', element: elements.copySessionBtn },
+                        { id: '#show-clear-chat-button-toggle', element: elements.clearChatBtn },
                         { id: '#show-api-provider-toggle-header', element: elements.headerApiProviderToggleBtn },
                         { id: '#show-scroll-to-top-button-toggle', element: elements.scrollToTopBtn },
                         { id: '#show-scroll-to-bottom-button-toggle', element: elements.scrollToBottomBtn },
@@ -11404,12 +11413,18 @@
                         if (confirmed) this.confirmStartNewChat();
                     });
                 });
-                elements.deleteSessionBtn.addEventListener('click', () => {
-                    this.confirmDeleteCurrentSession();
-                    document.getElementById('header-menu-popover')?.hidePopover();
-                });
                 elements.copySessionBtn.addEventListener('click', () => {
                     this.copyCurrentSessionText();
+                    document.getElementById('header-menu-popover')?.hidePopover();
+                });
+                elements.clearChatBtn.addEventListener('click', () => {
+                    document.getElementByIwCd('header-menu-popover')?.hidePopover();
+                    uiUtils.showCustomConfirm("現在のチャットをクリアして新規チャットを開始しますか？").then(confirmed => {
+                        if (confirmed) this.startNehat();
+                    });
+                });
+                elements.deleteSessionBtn.addEventListener('click', () => {
+                    this.confirmDeleteCurrentSession();
                     document.getElementById('header-menu-popover')?.hidePopover();
                 });
                 elements.toggleAllContentBtn.addEventListener('click', () => {
@@ -11696,6 +11711,10 @@
                 });
                 elements.showCopySessionButtonToggle.addEventListener('change', () => {
                     state.settings.showCopySessionButton = elements.showCopySessionButtonToggle.checked;
+                    uiUtils.updateChatScreenElementVisibility();
+                });
+                elements.showClearChatButtonToggle.addEventListener('change', () => {
+                    state.settings.showClearChatButton = elements.showClearChatButtonToggle.checked;
                     uiUtils.updateChatScreenElementVisibility();
                 });
                 elements.showScrollToTopButtonToggle.addEventListener('change', () => {
@@ -14987,6 +15006,7 @@
                 newSettings.showNewChatButton = elements.showNewChatButtonToggle.checked;
                 newSettings.showDeleteSessionButton = elements.showDeleteSessionButtonToggle.checked;
                 newSettings.showCopySessionButton = elements.showCopySessionButtonToggle.checked;
+                newSettings.showClearChatButton = elements.showClearChatButtonToggle.checked;
                 newSettings.showScrollToTopButton = elements.showScrollToTopButtonToggle.checked;
                 newSettings.showScrollToBottomButton = elements.showScrollToBottomButtonToggle.checked;
                 newSettings.showToggleAllContentButton = elements.showToggleAllContentButtonToggle.checked;
@@ -18903,6 +18923,7 @@
                         HelpCircle: lucide.HelpCircle,
                         FilePlus: lucide.FilePlus,
                         Upload: lucide.Upload,
+                        Eraser: lucide.Eraser,
                     },
                     nameAttr: 'data-lucide',
                     attrs: {
