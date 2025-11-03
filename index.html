@@ -16169,7 +16169,7 @@
                     // メッセージを展開したときに一番下にスクロール
                     if (!isCollapsed) {
                         setTimeout(() => {
-                            messageElement.scrollIntoView({ block: 'end' });
+                            messageElement.querySelector(".message-actions").scrollIntoView({ block: 'end' });
                         }, 100);
                     }
                 }
