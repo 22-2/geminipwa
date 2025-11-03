@@ -6478,8 +6478,8 @@
         const CLAUDE_API_BASE_URL = 'https://api.anthropic.com/v1/messages';
         const OPENAI_API_BASE_URL = 'https://api.openai.com/v1/chat/completions';
         const XAI_API_BASE_URL = 'https://api.x.ai/v1/chat/completions';
-        const DUPLICATE_SUFFIX = ' (コピー)';
-        const IMPORT_PREFIX = '(取込) ';
+        const DUPLICATE_SUFFIX = '📋 ';
+        const IMPORT_PREFIX = '📥 ';
 
         const LIGHT_THEME_COLOR = '#4a90e2';
         const DARK_THEME_COLOR = '#007aff';
@@ -9319,7 +9319,7 @@
                     }
                 }
 
-                const displayTitle = isNewChat ? titleText : `: ${titleText}`;
+                const displayTitle = titleText //isNewChat ? titleText : `${titleText}`;
                 elements.chatTitle.textContent = displayTitle;
                 document.title = `GeminiPWA - ${titleText}`;
             },
@@ -14610,7 +14610,7 @@
                                 continue;
                             }
 
-                            const titlePrefix = state.settings.addPrefixOnImport ? `${IMPORT_PREFIX}(全) ` : '';
+                            const titlePrefix = state.settings.addPrefixOnImport ? `${IMPORT_PREFIX} ` : '';
                             const newChat = {
                                 title: `${titlePrefix}${chatData.title}`.substring(0, 100),
                                 messages: (chatData.messages || []).map(msg => ({
