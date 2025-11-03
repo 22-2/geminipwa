@@ -1034,7 +1034,6 @@
             z-index: 10;
             transition: background-color 0.3s ease, padding 0.2s ease, gap 0.2s ease, min-height 0.2s ease;
             gap: 10px;
-            flex-direction: row-reverse;
             justify-content: flex-start;
         }
 
@@ -1051,28 +1050,7 @@
             text-align: right;
             margin: 0;
             margin-left: auto;
-            order: 2;
             transition: font-size 0.2s ease;
-        }
-
-        #history-screen .app-header #back-to-chat-from-history {
-            order: 1;
-        }
-
-        #history-screen .app-header #export-all-sessions-btn {
-            order: 3;
-            padding: 4px 8px;
-        }
-
-        #history-screen .app-header #import-all-sessions-btn {
-            order: 4;
-            padding: 4px 8px;
-        }
-
-        #history-screen .app-header #import-history-btn {
-            order: 5;
-            margin-right: 0;
-            padding: 4px 8px;
         }
 
         .history-action-button.gold {
@@ -4333,15 +4311,23 @@
             <header class="app-header">
                 <button id="back-to-chat-from-history" class="header-button" aria-label="チャットへ戻る"><i data-lucide="arrow-left"></i></button>
                 <h1 id="history-title">履歴一覧</h1>
+                <button id="history-menu-btn" class="icon-button" aria-label="メニュー" popovertarget="history-menu-popover"><i data-lucide="more-vertical"></i></button>
 
-                <button id="export-all-sessions-btn" class="header-save-button history-action-button gold"
-                    title="全セッションをJSON形式で出力">全出力</button>
-
-                <button id="import-all-sessions-btn" class="header-save-button history-action-button purple"
-                    title="全セッションをJSON形式で取込">全取込</button>
+                <div id="history-menu-popover" popover="auto" anchor="history-menu-btn" class="header-menu-popover">
+                    <button id="export-all-sessions-btn" class="menu-item" title="全セッションをJSON形式で出力">
+                        <i data-lucide="download"></i>
+                        <span>全出力</span>
+                    </button>
+                    <button id="import-all-sessions-btn" class="menu-item" title="全セッションをJSON形式で取込">
+                        <i data-lucide="upload"></i>
+                        <span>全取込</span>
+                    </button>
+                    <button id="import-history-btn" class="menu-item" title="単一履歴をテキスト形式でインポート">
+                        <i data-lucide="file-plus"></i>
+                        <span>インポート</span>
+                    </button>
+                </div>
                 <input type="file" id="import-all-sessions-input" accept=".json" class="hidden">
-
-                <button id="import-history-btn" class="header-save-button" title="単一履歴をテキスト形式でインポート">インポート</button>
                 <input type="file" id="import-history-input" accept=".txt" class="hidden">
             </header>
             <main class="main-content">
@@ -11441,14 +11427,23 @@
                 });
                 elements.userInput.addEventListener('input', () => uiUtils.updateAttachmentBadgeVisibility());
 
-                elements.importHistoryBtn.addEventListener('click', () => elements.importHistoryInput.click());
+                elements.importHistoryBtn.addEventListener('click', () => {
+                    document.getElementById('history-menu-popover')?.hidePopover();
+                    elements.importHistoryInput.click();
+                });
                 elements.importHistoryInput.addEventListener('change', (event) => {
                     const file = event.target.files[0];
                     if (file) this.handleHistoryImport(file);
                     event.target.value = null;
                 });
-                elements.exportAllSessionsBtn.addEventListener('click', () => this.exportAllSessions());
-                elements.importAllSessionsBtn.addEventListener('click', () => elements.importAllSessionsInput.click());
+                elements.exportAllSessionsBtn.addEventListener('click', () => {
+                    document.getElementById('history-menu-popover')?.hidePopover();
+                    this.exportAllSessions();
+                });
+                elements.importAllSessionsBtn.addEventListener('click', () => {
+                    document.getElementById('history-menu-popover')?.hidePopover();
+                    elements.importAllSessionsInput.click();
+                });
                 elements.importAllSessionsInput.addEventListener('change', (event) => {
                     const file = event.target.files[0];
                     if (file) this.handleAllSessionsImport(file);
@@ -18873,6 +18868,8 @@
                         Layers: lucide.Layers,
                         Bot: lucide.Bot,
                         HelpCircle: lucide.HelpCircle,
+                        FilePlus: lucide.FilePlus,
+                        Upload: lucide.Upload,
                     },
                     nameAttr: 'data-lucide',
                     attrs: {
@@ -18893,6 +18890,15 @@
             headerMenuPopover.addEventListener('toggle', (event) => {
                 if (event.newState === 'open') {
                     initLucideIcons(headerMenuPopover);
+                }
+            });
+        }
+
+        const historyMenuPopover = document.getElementById('history-menu-popover');
+        if (historyMenuPopover) {
+            historyMenuPopover.addEventListener('toggle', (event) => {
+                if (event.newState === 'open') {
+                    initLucideIcons(historyMenuPopover);
                 }
             });
         }
