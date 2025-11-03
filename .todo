@@ -1,5 +1,6 @@
-- [x] clear chat
-- [x] copy chat
 - [ ] create branch from here
 - [ ] 最下部、最上部をfloating buttonに
 - [ ] このメッセージから再生成と・このメッセージだけ再生成に分離
+- [x] clear chat
+- [x] copy chat
+- [x] メッセージボタンの修正
