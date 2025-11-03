@@ -2872,7 +2872,8 @@
         }
 
         .message-actions-trigger:hover,
-        .message:hover .message-actions-trigger {
+        .message:hover .message-actions-trigger,
+        .message:has(.message-actions-popover:popover-open) .message-actions-trigger {
             opacity: 1;
             pointer-events: auto;
         }
