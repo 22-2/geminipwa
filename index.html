@@ -4158,6 +4158,15 @@
                 <button id="header-menu-btn" class="icon-button" aria-label="メニュー" popovertarget="header-menu-popover"><i data-lucide="more-vertical"></i></button>
 
                 <div id="header-menu-popover" popover="auto" anchor="header-menu-btn" class="header-menu-popover">
+                    <button id="scroll-to-top-btn" class="menu-item scroll-jump-button" aria-label="最上部へスクロール" title="最上部へ">
+                        <i data-lucide="chevron-up"></i>
+                        <span>最上部へ</span>
+                    </button>
+                    <button id="scroll-to-bottom-btn" class="menu-item scroll-jump-button" aria-label="最下部へスクロール" title="最下部へ">
+                        <i data-lucide="chevron-down"></i>
+                        <span>最下部へ</span>
+                    </button>
+                    <hr class="menu-divider">
                     <button id="new-chat-btn" class="menu-item" title="新規チャットを開始">
                         <i data-lucide="plus"></i>
                         <span>新規チャット</span>
@@ -4181,14 +4190,6 @@
                         <span>APIプロバイダー</span>
                     </button>
                     <hr class="menu-divider">
-                    <button id="scroll-to-top-btn" class="menu-item scroll-jump-button" aria-label="最上部へスクロール" title="最上部へ">
-                        <i data-lucide="chevron-up"></i>
-                        <span>最上部へ</span>
-                    </button>
-                    <button id="scroll-to-bottom-btn" class="menu-item scroll-jump-button" aria-label="最下部へスクロール" title="最下部へ">
-                        <i data-lucide="chevron-down"></i>
-                        <span>最下部へ</span>
-                    </button>
                     <button id="toggle-all-content-btn" class="menu-item" aria-label="全メッセージ表示切替" title="全メッセージの表示/非表示を切り替え">
                         <i data-lucide="eye"></i>
                         <span>全メッセージ表示切替</span>
@@ -18647,6 +18648,12 @@
                     appHeader.classList.add('visible');
                     clearTimeout(hideTimeout);
                 } else if (e.clientY > 100) {
+                    // popoverが開いている場合は閉じない
+                    const headerMenuPopover = document.getElementById('header-menu-popover');
+                    if (headerMenuPopover && headerMenuPopover.matches(':popover-open')) {
+                        return;
+                    }
+
                     // マウスが100px以上下にある場合、少し遅延してから非表示
                     clearTimeout(hideTimeout);
                     hideTimeout = setTimeout(() => {
